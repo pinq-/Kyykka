@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Pelaaja</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script> -->
+    <script src="PelaajaJS.js"></script>
+    <script src="PelaajaJS_Jquery.js"></script>
+    <link href="PelaajaTyyli.css" type="text/css" rel="stylesheet">
+
+</head>
+    <div  class="TopDiv">
+        <div id="PelaajaTiedot" class="inline_first">
+            Nimi: <b id="Nimi"></b>
+            <br>Joukke: <b id="Joukkue"></b>
+        </div>
+        <div class="inline_second">
+            <canvas id="pisteet" height="100"></canvas>
+        </div>
+    </div>
+    <div id="js-legend"  class="chart-legend"></div>
+    <div id="piiraat" class="pisteet">
+        <div class ="inline_pie_first">
+            <canvas  id="heitotyli" height="150"></canvas>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
