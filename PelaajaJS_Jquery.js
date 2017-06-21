@@ -8,6 +8,17 @@ bgColors = [
     'rgba(207, 91, 166, 1)',
     'rgba(255, 159, 64, 1)'
 ];
+Heitto_nimet =["Hauki", "Virkamies", "2", "3", "4", "5","6","6<"];
+
+prosentti_label = {label: function(tooltipItem, data) {
+            var dataset = data.datasets[tooltipItem.datasetIndex];
+            var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+                return previousValue + currentValue;
+            });
+            var currentValue = dataset.data[tooltipItem.index];
+            var precentage = Math.floor(((currentValue/total) * 100)+0.5);
+            return Heitto_nimet[tooltipItem.index] +": "+ precentage + "%";
+}}
 Pelaaja = {name:"Testi Marko", number:69 , team:"HUI"};
 heitot = [{heitto_jarjestys:15, heitto_paikka:4, era:1, kyykat:2, jaljella:27, ottelu_numero:738} ,
     {heitto_jarjestys:16, heitto_paikka:4, era:1, kyykat:1  , jaljella:25, ottelu_numero:738} ,
@@ -33,6 +44,54 @@ heitot = [{heitto_jarjestys:15, heitto_paikka:4, era:1, kyykat:2, jaljella:27, o
     {heitto_jarjestys:2 , heitto_paikka:1, era:1, kyykat:3  , jaljella:37, ottelu_numero:767} ,
     {heitto_jarjestys:17, heitto_paikka:1, era:1, kyykat:2  , jaljella:20, ottelu_numero:767} ,
     {heitto_jarjestys:18, heitto_paikka:1, era:1, kyykat:3  , jaljella:18, ottelu_numero:767} ,
+    {heitto_jarjestys:1 , heitto_paikka:1, era:1, kyykat:1  , jaljella:38, ottelu_numero:767} ,
+    {heitto_jarjestys:2 , heitto_paikka:1, era:1, kyykat:3  , jaljella:37, ottelu_numero:767} ,
+    {heitto_jarjestys:17, heitto_paikka:1, era:1, kyykat:2  , jaljella:20, ottelu_numero:767} ,
+    {heitto_jarjestys:18, heitto_paikka:1, era:1, kyykat:3  , jaljella:18, ottelu_numero:767} ,
+    {heitto_jarjestys:1 , heitto_paikka:1, era:1, kyykat:1  , jaljella:38, ottelu_numero:767} ,
+    {heitto_jarjestys:2 , heitto_paikka:1, era:1, kyykat:3  , jaljella:37, ottelu_numero:767} ,
+    {heitto_jarjestys:17, heitto_paikka:1, era:1, kyykat:2  , jaljella:20, ottelu_numero:767} ,
+    {heitto_jarjestys:18, heitto_paikka:1, era:1, kyykat:3  , jaljella:18, ottelu_numero:767} ,
+    {heitto_jarjestys:1 , heitto_paikka:1, era:1, kyykat:1  , jaljella:38, ottelu_numero:767} ,
+    {heitto_jarjestys:2 , heitto_paikka:1, era:1, kyykat:3  , jaljella:37, ottelu_numero:767} ,
+    {heitto_jarjestys:17, heitto_paikka:1, era:1, kyykat:2  , jaljella:20, ottelu_numero:767} ,
+    {heitto_jarjestys:18, heitto_paikka:1, era:1, kyykat:3  , jaljella:18, ottelu_numero:767} ,
+    {heitto_jarjestys:1 , heitto_paikka:1, era:1, kyykat:1  , jaljella:38, ottelu_numero:767} ,
+    {heitto_jarjestys:2 , heitto_paikka:1, era:1, kyykat:3  , jaljella:37, ottelu_numero:767} ,
+    {heitto_jarjestys:17, heitto_paikka:1, era:1, kyykat:2  , jaljella:20, ottelu_numero:767} ,
+    {heitto_jarjestys:18, heitto_paikka:1, era:1, kyykat:3  , jaljella:18, ottelu_numero:767} ,
+    {heitto_jarjestys:1 , heitto_paikka:1, era:1, kyykat:1  , jaljella:38, ottelu_numero:767} ,
+    {heitto_jarjestys:2 , heitto_paikka:1, era:1, kyykat:3  , jaljella:37, ottelu_numero:767} ,
+    {heitto_jarjestys:17, heitto_paikka:1, era:1, kyykat:2  , jaljella:20, ottelu_numero:767} ,
+    {heitto_jarjestys:18, heitto_paikka:1, era:1, kyykat:3  , jaljella:18, ottelu_numero:767} ,
+    {heitto_jarjestys:1 , heitto_paikka:1, era:1, kyykat:1  , jaljella:38, ottelu_numero:767} ,
+    {heitto_jarjestys:2 , heitto_paikka:1, era:1, kyykat:3  , jaljella:37, ottelu_numero:767} ,
+    {heitto_jarjestys:17, heitto_paikka:1, era:1, kyykat:2  , jaljella:20, ottelu_numero:767} ,
+    {heitto_jarjestys:18, heitto_paikka:1, era:1, kyykat:3  , jaljella:18, ottelu_numero:767} ,
+    {heitto_jarjestys:1 , heitto_paikka:1, era:1, kyykat:1  , jaljella:38, ottelu_numero:767} ,
+    {heitto_jarjestys:2 , heitto_paikka:1, era:1, kyykat:3  , jaljella:37, ottelu_numero:767} ,
+    {heitto_jarjestys:17, heitto_paikka:1, era:1, kyykat:2  , jaljella:20, ottelu_numero:767} ,
+    {heitto_jarjestys:18, heitto_paikka:1, era:1, kyykat:3  , jaljella:18, ottelu_numero:767} ,
+    {heitto_jarjestys:1 , heitto_paikka:1, era:1, kyykat:1  , jaljella:38, ottelu_numero:767} ,
+    {heitto_jarjestys:2 , heitto_paikka:1, era:1, kyykat:3  , jaljella:37, ottelu_numero:767} ,
+    {heitto_jarjestys:17, heitto_paikka:1, era:1, kyykat:2  , jaljella:20, ottelu_numero:767} ,
+    {heitto_jarjestys:18, heitto_paikka:1, era:1, kyykat:3  , jaljella:18, ottelu_numero:767} ,
+    {heitto_jarjestys:1 , heitto_paikka:1, era:1, kyykat:1  , jaljella:38, ottelu_numero:767} ,
+    {heitto_jarjestys:2 , heitto_paikka:1, era:1, kyykat:3  , jaljella:37, ottelu_numero:767} ,
+    {heitto_jarjestys:17, heitto_paikka:1, era:1, kyykat:2  , jaljella:20, ottelu_numero:767} ,
+    {heitto_jarjestys:18, heitto_paikka:1, era:1, kyykat:3  , jaljella:18, ottelu_numero:767} ,
+    {heitto_jarjestys:1 , heitto_paikka:1, era:1, kyykat:1  , jaljella:38, ottelu_numero:767} ,
+    {heitto_jarjestys:2 , heitto_paikka:1, era:1, kyykat:3  , jaljella:37, ottelu_numero:767} ,
+    {heitto_jarjestys:17, heitto_paikka:1, era:1, kyykat:2  , jaljella:20, ottelu_numero:767} ,
+    {heitto_jarjestys:18, heitto_paikka:1, era:1, kyykat:3  , jaljella:18, ottelu_numero:767} ,
+    {heitto_jarjestys:1 , heitto_paikka:1, era:1, kyykat:1  , jaljella:38, ottelu_numero:767} ,
+    {heitto_jarjestys:2 , heitto_paikka:1, era:1, kyykat:3  , jaljella:37, ottelu_numero:767} ,
+    {heitto_jarjestys:17, heitto_paikka:1, era:1, kyykat:2  , jaljella:20, ottelu_numero:767} ,
+    {heitto_jarjestys:18, heitto_paikka:1, era:1, kyykat:3  , jaljella:18, ottelu_numero:767} ,
+    {heitto_jarjestys:1 , heitto_paikka:1, era:1, kyykat:1  , jaljella:38, ottelu_numero:767} ,
+    {heitto_jarjestys:2 , heitto_paikka:1, era:1, kyykat:3  , jaljella:37, ottelu_numero:767} ,
+    {heitto_jarjestys:17, heitto_paikka:1, era:1, kyykat:2  , jaljella:20, ottelu_numero:767} ,
+    {heitto_jarjestys:18, heitto_paikka:1, era:1, kyykat:3  , jaljella:18, ottelu_numero:767} ,
     {heitto_jarjestys:1 , heitto_paikka:1, era:2, kyykat:4  , jaljella:38, ottelu_numero:767} ,
     {heitto_jarjestys:2 , heitto_paikka:1, era:2, kyykat:3  , jaljella:34, ottelu_numero:767} ,
     {heitto_jarjestys:17, heitto_paikka:1, era:2, kyykat:4  , jaljella:25, ottelu_numero:767} ,
@@ -43,11 +102,18 @@ $( document ).ready(function() {
     piste_jaottelu = pisteiden_taulukointi(heitot,pisteet[0]);
     $("#Nimi").text(Pelaaja.name +" #"+Pelaaja.number);
     $("#Joukkue").text(Pelaaja.team);
+    $("#paras_heitto").text(pisteet[0].max());
+    $("#era_maara").text(piste_jaottelu[4].length);
+    $("#heitot_maara").text(pisteet[0].length);
+    $("#pisteet_maara").text(pisteet[4][2]);
+    $("#pisteetper_maara").text(pisteet[4][3]);
+    $("#hauki_prosentti").text(pisteet[4][0]+"%");
+    $("#Joulukuuset").text(pisteet[4][1]);
     var ctx = document.getElementById("heitotyli").getContext('2d');
     var heitotyli = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ["Hauki", "Virkamies", "2", "3", "4", "5","6","6<"],
+            labels: Heitto_nimet,
             datasets: [{
                 data: pisteet[1],
                 backgroundColor: bgColors,
@@ -61,6 +127,9 @@ $( document ).ready(function() {
            },
            legend: {
                display: false
+           },
+           tooltips: {
+               callbacks: prosentti_label
            }
         }
     });
@@ -70,7 +139,7 @@ $( document ).ready(function() {
         var heitotali = new Chart(ctx2, {
             type: 'pie',
             data: {
-                labels: ["Hauki", "Virkamies", "2", "3", "4", "5","6","6<"],
+                labels: Heitto_nimet,
                 datasets: [{
                     data: pisteet[2],
                     backgroundColor: bgColors,
@@ -85,7 +154,10 @@ $( document ).ready(function() {
                },
                legend: {
                    display:false,
-                }
+               },
+               tooltips: {
+                   callbacks: prosentti_label
+               }
             }
         });
     }
@@ -96,7 +168,7 @@ $( document ).ready(function() {
         var aloitusheitot = new Chart(ctx3, {
             type: 'pie',
             data: {
-                labels: ["Hauki", "Virkamies", "2", "3", "4", "5","6","6<"],
+                labels: Heitto_nimet,
                 datasets: [{
                     data: pisteet[3],
                     backgroundColor: bgColors,
@@ -111,7 +183,10 @@ $( document ).ready(function() {
                },
                legend: {
                    display:false,
-                }
+               },
+               tooltips: {
+                   callbacks: prosentti_label
+               }
             }
         });
     }
@@ -184,6 +259,7 @@ function laske_pisteet(objekti){
     yli = [];
     aloitus = [];
     pisteet = [];
+    tieto = [0,0,0,0];
     var heittoja = 0;
     $.each(objekti, function(index) {
         heittoja ++;
@@ -198,16 +274,23 @@ function laske_pisteet(objekti){
         }
         if(objekti[index].kyykat === 'h'){
             pisteet.push(0);
+            tieto[0] ++;
         }
         else{
             pisteet.push(objekti[index].kyykat*2);
+            if (objekti[index].kyykat == 6){
+                tieto[1] ++;
+            }
+            tieto[2] += objekti[index].kyykat*2;
         }
     });
 
     var count_yli = heittojen_maara(yli);
     var count_alle = heittojen_maara(alle);
     var count_aloitus = heittojen_maara(aloitus);
-    return [pisteet,count_yli,count_alle,count_aloitus];
+    tieto[0] = Math.round(100*(tieto[0]/pisteet.length));
+    tieto[3] = Math.round(100*(tieto[2]/pisteet.length))/100;
+    return [pisteet,count_yli,count_alle,count_aloitus,tieto];
 
 
 }
@@ -254,3 +337,11 @@ function pisteiden_taulukointi(lista,piste_lista){
 	}
     return     [aloitus, toka, kolmas, neljas, label ,keskiarvo ];
 }
+
+Array.prototype.max = function() {
+  return Math.max.apply(null, this);
+};
+
+Array.prototype.min = function() {
+  return Math.min.apply(null, this);
+};
