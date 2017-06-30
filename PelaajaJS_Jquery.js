@@ -1,14 +1,15 @@
 bgColors = [
-    'rgba(255, 99, 132, 1)',
-    'rgba(54, 162, 235, 1)',
-    'rgba(243, 230, 47, 1)',
-    'rgba(246, 106, 0, 1)',
-    'rgba(153, 102, 255, 1)',
-    'rgba(110, 194, 44, 1)',
-    'rgba(207, 91, 166, 1)',
-    'rgba(255, 159, 64, 1)'
+    '#e03d07',
+    '#e06508',
+    '#e1dd0a',
+    '#c3f203',
+    '#9ef402',
+    '#78f702',
+    '#51fa01',
+    '#65d101',
+    '#00cc00'
 ];
-Heitto_nimet =["Hauki", "Virkamies", "2", "3", "4", "5","6","6<"];
+Heitto_nimet =["Hauki", "Virkamies","1", "2", "3", "4", "5","6","6<"];
 
 prosentti_label = {label: function(tooltipItem, data) {
             var dataset = data.datasets[tooltipItem.datasetIndex];
@@ -197,7 +198,7 @@ $( document ).ready(function() {
             labels: piste_jaottelu[4],
             datasets: [{
                 type: 'line',
-                label: 'pisteet/heitto',
+                label: 'kyykat/heitto',
                 borderColor: 'rgb(255, 51, 51)',
                 borderWidth: 4,
                 fill: false,
@@ -298,7 +299,7 @@ function heittojen_maara(lista){
     if (lista.length === 0){
         return [];
     }
-    tulos_lista = [0,0,0,0,0,0,0,0];
+    tulos_lista = [0,0,0,0,0,0,0,0,0];
     $.each(lista, function(index){
         if (lista[index] === 'h'){
             tulos_lista[0] += 1;
@@ -325,10 +326,10 @@ function pisteiden_taulukointi(lista,piste_lista){
     for(var i = 0, len = lista.length; i < len; i ++){
 
         if($.inArray(lista[i].heitto_jarjestys,aloitukset) > -1){
-            aloitus.push(piste_lista[i]);
-            toka.push(piste_lista[i+1]);
-            kolmas.push(piste_lista[i+2]);
-            neljas.push(piste_lista[i+3]);
+            aloitus.push(piste_lista[i]/2);
+            toka.push(piste_lista[i+1]/2);
+            kolmas.push(piste_lista[i+2]/2);
+            neljas.push(piste_lista[i+3]/2);
             label.push(lista[i].heitto_paikka);
             keskiar = (piste_lista[i]+piste_lista[i+1]+piste_lista[i+2]+piste_lista[i+3])/4;
             keskiarvo.push(keskiar);

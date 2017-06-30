@@ -15,15 +15,41 @@
 </head>
     <div  class="TopDiv">
         <div id="PelaajaTiedot" class="inline_first">
-            Nimi: <b id="Nimi"></b>
-            <br>Joukke: <b id="Joukkue"></b>
-            <br> Paras heitto: <b id= "paras_heitto"></b>
-            <br> Erät: <b id= "era_maara"></b>
-            <br> Heitot: <b id= "heitot_maara"></b>
-            <br> Pisteet: <b id= "pisteet_maara"></b>
-            <br> Pisteet/heitto: <b id= "pisteetper_maara"></b>
-            <br> Hauki prosentti: <b id= "hauki_prosentti"></b>
-            <br> Joulukuuset: <b id= "Joulukuuset"></b>
+          <b id="Nimi"></b>
+          <table class="tulokset">
+            <tr>
+              <td class="ensimmainen">Joukkue </td>
+              <td  id="Joukkue"></td>
+            </tr>
+            <tr>
+              <td>Erät </td>
+              <td  id= "era_maara"></td>
+            </tr>
+            <tr>
+              <td>Heitot</td>
+              <td  id= "heitot_maara"></td>
+            </tr>
+            <tr>
+              <td>Pisteet</td>
+              <td  id= "pisteet_maara"></td>
+            </tr>
+            <tr>
+              <td>Pisteet/heitto</td>
+              <td   id= "pisteetper_maara"></td>
+            </tr>
+            <tr>
+              <td>Paras heitto (Pistettä)</td>
+              <td  id= "paras_heitto"></td>
+            </tr>
+            <tr>
+              <td>Hauki prosentti</td>
+              <td  id= "hauki_prosentti"></td>
+            </tr>
+            <tr>
+              <td>Joulukuuset</td>
+              <td  id= "Joulukuuset"></td>
+            </tr>
+          </table>
         </div>
         <div class="inline_second">
             <canvas id="pisteet" height="100"></canvas>

@@ -3,7 +3,20 @@ canvas{
     -webkit-user-select: none;
     -ms-user-select: none;
 }
-
+.tulokset{
+  /*font-size: large;*/
+  font-family:  Arial;
+}
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+td:nth-child(even) {
+    font-weight: bold;
+    width: 80px;
+}
+.ensimmainen{
+    width: 180px;
+}
 
 .TopDiv{
     /*position: relative;*/
@@ -16,8 +29,6 @@ canvas{
     float: left;
 
     height:100%;
-    /*position: left;*/
-    /*height:500px;*/
     width : 20%;
 
 }
