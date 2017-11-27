@@ -9,7 +9,7 @@ bgColors = [
     '#65d101',
     '#00cc00'
 ];
-Heitto_nimet =["Hauki", "Virkamies","1", "2", "3", "4", "5","6","6<"];
+Heitto_nimet =["Haukiii", "Virkamies","1", "2", "3", "4", "5","6","6<"];
 
 prosentti_label = {label: function(tooltipItem, data) {
             var dataset = data.datasets[tooltipItem.datasetIndex];
