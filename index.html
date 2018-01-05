@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Pelaaja</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script> -->
+    <script src="PelaajaJS.js"></script>
+    <script src="PelaajaJS_Jquery.js"></script>
+    <link href="PelaajaTyyli.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+    <!-- <div class= "center"> -->
+        <div id="PelaajaTiedot" class= "center">
+          <div class ="Player">
+            <b id="Joukkue"></b>
+            <br>
+              <b id="Nimi">Hae pelaajaa</b>
+            </br>
+          </div>
+        </div>
+        <div class ="tulokset">
+          <table>
+            <tr>
+              <td>Erät </td>
+              <td  id= "era_maara"></td>
+            </tr>
+            <tr>
+              <td>Heitot</td>
+              <td  id= "heitot_maara"></td>
+            </tr>
+            <tr>
+              <td>Pisteet</td>
+              <td  id= "pisteet_maara"></td>
+            </tr>
+            <tr>
+              <td>Kyykkää/heitto</td>
+              <td   id= "pisteetper_maara"></td>
+            </tr>
+            <tr>
+              <td>Paras heitto Kyykkää/Pistettä</td>
+              <td  id= "paras_heitto"></td>
+            </tr>
+            <tr>
+              <td>Hauki %</td>
+              <td  id= "hauki_prosentti"></td>
+            </tr>
+            <tr>
+              <td>Nollaheitot %</td>
+              <td  id= "nolla_prosentti"></td>
+            </tr>
+            <tr>
+              <td>Pisin nollaputki</td>
+              <td  id= "nolla_putki"></td>
+            </tr>
+            <tr>
+              <td>Joulukuuset</td>
+              <td  id= "Joulukuuset"></td>
+            </tr>
+          </table>
+        </div>
+    <div>
+        <canvas id="pisteet" height="100"></canvas>
+    </div>
+    <div id="js-legend"  class="chart-legend"></div>
+    <div id="piiraat" class="pisteet">
+        <div class ="inline_pie_first" id ="first_pie">
+            <canvas  id="heitotyli" height="150"></canvas>
+        <div class = "center" id = "maara_1"></div>
+        </div>
+        <div class = "inline_pie_second" id ="second_pie">
+            <canvas id="heitotali" height="150"></canvas>
+        <div class = "center" id = "maara_2"></div>
+        </div>
+        <div class = "inline_pie_second" id ="tree_pie">
+            <canvas id="aloitusheitot" height="150"></canvas>
+        <div class = "center" id = "maara_3"></div>
+        </div>
+
+
+    </div>
+</body>
+
+</html>

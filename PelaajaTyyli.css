@@ -3,8 +3,25 @@ canvas{
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+
+.center{
+  text-align: center;
+  vertical-align: middle;
+  font-family: Arial;
+  font-weight: 200;
+}
+.Player{
+  margin: 0 auto;
+  background-color: #dddddd;
+  width: 50%;
+}
+#Nimi{
+  font-size: 30px;
+
+}
 .tulokset{
-  /*font-size: large;*/
+  margin: 0 auto;
+  width: 30%;
   font-family:  Arial;
 }
 tr:nth-child(even) {
@@ -12,10 +29,7 @@ tr:nth-child(even) {
 }
 td:nth-child(even) {
     font-weight: bold;
-    width: 80px;
-}
-.ensimmainen{
-    width: 180px;
+    width: 40%;
 }
 
 .TopDiv{
