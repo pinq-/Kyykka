@@ -15,21 +15,26 @@ canvas{
   background-color: #dddddd;
   width: 50%;
 }
-#Nimi{
+.Nimi{
   font-size: 30px;
-
 }
 .tulokset{
+  text-align: center;
   margin: 0 auto;
-  width: 30%;
+  width: 100%;
   font-family:  Arial;
+}
+.tulokset tr:nth-child(2) td{
+  padding: 2px 10px;
+}
+table{
+  margin: 0 auto;
 }
 tr:nth-child(even) {
     background-color: #dddddd;
+    font-weight: bold;
 }
 td:nth-child(even) {
-    font-weight: bold;
-    width: 40%;
 }
 
 .TopDiv{

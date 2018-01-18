@@ -2,13 +2,11 @@
 <html>
 
 <head>
-  <!-- juuu -->
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Pelaaja</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-    <script src="PelaajaJS.js"></script>
     <script src="PelaajaJS_Jquery.js"></script>
     <link href="PelaajaTyyli.css" type="text/css" rel="stylesheet">
 
@@ -18,47 +16,56 @@
           <div class ="Player">
             <b id="Joukkue"></b>
             <br>
-              <b id="Nimi">Hae pelaajaa</b>
+              <b id="Nimi" class="Nimi">Hae pelaajaa</b>
+              <b id="Numero" class="Nimi"></b>
             </br>
+          </div>
+          <div>
+            <select id = "Years">
+              <option>2018</option>
+              <option>2017</option>
+              <option>2016</option>
+              <option>2015</option>
+              <option>2014</option>
+              <option>2013</option>
+            </select>
           </div>
         </div>
         <div class ="tulokset">
-          <table>
+          <table clas ="table">
             <tr>
               <td>Erät </td>
-              <td  id= "era_maara"></td>
-            </tr>
-            <tr>
               <td>Heitot</td>
-              <td  id= "heitot_maara"></td>
-            </tr>
-            <tr>
               <td>Pisteet</td>
-              <td  id= "pisteet_maara"></td>
-            </tr>
-            <tr>
-              <td>Kyykkää/heitto</td>
-              <td   id= "pisteetper_maara"></td>
-            </tr>
-            <tr>
-              <td>Paras heitto Kyykkää/Pistettä</td>
-              <td  id= "paras_heitto"></td>
-            </tr>
-            <tr>
+              <td>Kes. heitto</td>
+              <td>1.</td>
+              <td>2.</td>
+              <td>3.</td>
+              <td>4.</td>
+              <td>Paras heitto</td>
               <td>Hauki %</td>
-              <td  id= "hauki_prosentti"></td>
-            </tr>
-            <tr>
-              <td>Nollaheitot %</td>
-              <td  id= "nolla_prosentti"></td>
-            </tr>
-            <tr>
-              <td>Pisin nollaputki</td>
-              <td  id= "nolla_putki"></td>
-            </tr>
-            <tr>
+              <td>Nolla %</td>
+              <td>Nollaputki</td>
               <td>Joulukuuset</td>
+              <td>Paras erä</td>
+              <td>Huonoin erä</td>
+            </tr>
+            <tr>
+              <td  id= "era_maara"></td>
+              <td  id= "heitot_maara"></td>
+              <td  id= "pisteet_maara"></td>
+              <td   id= "pisteetper_maara"></td>
+              <td   id= "pisteetper_eka"></td>
+              <td   id= "pisteetper_tok"></td>
+              <td   id= "pisteetper_kol"></td>
+              <td   id= "pisteetper_nel"></td>
+              <td  id= "paras_heitto"></td>
+              <td  id= "hauki_prosentti"></td>
+              <td  id= "nolla_prosentti"></td>
+              <td  id= "nolla_putki"></td>
               <td  id= "Joulukuuset"></td>
+              <td  id= "max_era"></td>
+              <td  id= "min_era"></td>
             </tr>
           </table>
         </div>

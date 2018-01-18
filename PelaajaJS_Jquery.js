@@ -1,26 +1,43 @@
-//muuta laskenta uusien sääntöjen mukaiseksi
 
-$( document ).ready(function() {
-      $( "#PelaajaTiedot" ).click(function() {
-    	var haku_nimi = prompt("Hae pelaajaa", $("#Nimi").text());
-      // console.log(text)
-      // update_pies();
-      hae_teidot(haku_nimi);
-    });
-});
-function paivita_tiedot(data){
-
-  $("#Nimi").text(data.name +" #"+data.number);
-  $("#Joukkue").text(data.team);
-
-}
-
+var max_amount;
 var glob_aloitusheitot;
 var glob_pisteet;
 var glob_piste_jaottelu;
 var glob_heitot;
 var glob_heitotyli;
 var glob_heitotali;
+$( document ).ready(function() {
+    var year = 2017;
+    max_amount = 19;
+    var haku_nimi = "";
+    $( ".Player" ).click(function() {
+    	haku_nimi = prompt("Hae pelaajaa", $("#Nimi").text());
+      hae_teidot(haku_nimi,year);
+    });
+    $("#Years").change(function(){
+      $("#Years option:selected").each(function(){
+        year = $(this).text();
+      });
+      // console.log(haku_nimi);
+        if (haku_nimi != ""){
+          if (year < 2018){
+            max_amount = 19;
+
+          }else{
+            max_amount = 20;
+
+          }
+          hae_teidot(haku_nimi,year);
+        }
+    }).trigger("change");
+});
+function paivita_tiedot(data){
+
+  $("#Nimi").text(data.name);
+  $("#Numero").text("#"+data.number);
+  $("#Joukkue").text(data.team.replace(/&apos;/g, "'"));
+
+}
 
 function update_table(){
 
@@ -60,16 +77,22 @@ function update_table(){
     return Heitto_nimet[tooltipItem.index] +": "+ precentage + "%";
   }}
 
-  $("#paras_heitto").text(glob_pisteet[0].max()/2 + "/" +glob_pisteet[0].max());
+  $("#paras_heitto").text(glob_pisteet[0].max()/2);
   $("#era_maara").text(glob_piste_jaottelu[4].length);
   $("#heitot_maara").text(glob_pisteet[0].length);
   $("#pisteet_maara").text(glob_pisteet[4][2]);
   $("#pisteetper_maara").text(glob_pisteet[4][3]);
+  $("#pisteetper_eka").text(paikat[0][0]+"["+paikat[0][1]+"]");
+  $("#pisteetper_tok").text(paikat[1][0]+"["+paikat[1][1]+"]");
+  $("#pisteetper_kol").text(paikat[2][0]+"["+paikat[2][1]+"]");
+  $("#pisteetper_nel").text(paikat[3][0]+"["+paikat[3][1]+"]");
   $("#hauki_prosentti").text(glob_pisteet[4][0]+"%");
   $("#nolla_prosentti").text(glob_pisteet[4][4]+"%");
-  $("#nolla_putki").text(glob_piste_jaottelu[6]+" heittoa");
+  $("#nolla_putki").text(glob_piste_jaottelu[6]);
   $("#Joulukuuset").text(glob_pisteet[4][1]);
-  // console.log(pisteet[1]);
+  $("#max_era").text(Math.max.apply(null,keskiarvo_pisteet)*4);
+  $("#min_era").text(Math.min.apply(null,keskiarvo_pisteet)*4);
+  // console.log(paikat);
   $("#maara_1").text('Heittoja: '+ glob_pisteet[1].reduce(add, 0));
   var ctx = document.getElementById("heitotyli").getContext('2d');
   glob_heitotyli = new Chart(ctx, {
@@ -85,7 +108,7 @@ function update_table(){
           responsive: true,
           title: {
              display: true,
-             text: 'Yli 19'
+             text: 'Yli '+ max_amount
          },
          legend: {
              display: false
@@ -112,7 +135,7 @@ function update_table(){
             responsive: true,
             title: {
                display: true,
-               text: 'Alle 19'
+               text: 'Alle '+ max_amount
            },
            legend: {
                display:false,
@@ -221,8 +244,8 @@ function update_table(){
   });
 }
 
-function hae_teidot(nimi){
-  $.getJSON("http://pinq.kapsi.fi/github/Kyykka/workspace//index.php", {cmd : "player",name: nimi})
+function hae_teidot(nimi,select_year){
+  $.getJSON("http://pinq.kapsi.fi/github/Kyykka/workspace//index.php", {cmd : "player",name: nimi, year : select_year})
   .done(function(data){
         if (data.pelaaja.nimi == "not found"){
           $("#Nimi").text("Pelaaja ei löydy");
@@ -246,14 +269,14 @@ function laske_pisteet(objekti){
     var heittoja = 0;
     $.each(objekti, function(index) {
         heittoja ++;
-        if(objekti[index].jaljella == 38){
+        if(objekti[index].jaljella == max_amount*2){
             // console.log(objekti[index].kyykat);
             aloitus.push(objekti[index].kyykat);
         }
-        if(objekti[index].jaljella > 19){
+        if(objekti[index].jaljella >= max_amount){
             yli.push(objekti[index].kyykat);
         }
-        else if(objekti[index].jaljella < 19){
+        else if(objekti[index].jaljella < max_amount){
             alle.push(objekti[index].kyykat);
         }
         if(objekti[index].kyykat === 'h'){
@@ -309,8 +332,10 @@ function pisteiden_taulukointi(lista,piste_lista){
     kolmas = [];
     neljas = [];
     label = [];
-    keskiarvo = [];
+    keskiarvo_pisteet = [];
+    paikat = [[],[],[],[]];
     nollat = [0,0];
+    erat = [0,0];
     $.each(piste_lista, function(i,val){
       if( val == 0){
         nollat[0] += 1;
@@ -332,13 +357,21 @@ function pisteiden_taulukointi(lista,piste_lista){
           kolmas.push(piste_lista[i+2]/2);
           neljas.push(piste_lista[i+3]/2);
           label.push(lista[i].heitto_paikka);
+          paikat[Number(lista[i].heitto_paikka)-1].push(piste_lista[i]/2,piste_lista[i+1]/2,piste_lista[i+2]/2,piste_lista[i+3]/2);
           keskiar = (piste_lista[i]+piste_lista[i+1]+piste_lista[i+2]+piste_lista[i+3])/8;
-          keskiarvo.push(keskiar);
+          keskiarvo_pisteet.push(keskiar);
           i += 3;
       }
 	  }
     // console.log([aloitus, toka, kolmas, neljas, label ,keskiarvo ]);
-    return     [aloitus, toka, kolmas, neljas, label ,keskiarvo , nollat[1]];
+    $.each(paikat,function(i,val){
+      if(val.length != 0){
+        paikat[i] = [Math.round(100*(val.reduce(add,0)/val.length))/100,val.length];
+      }else{
+        paikat[i] = ["-",0];
+      }
+    });
+    return     [aloitus, toka, kolmas, neljas, label ,keskiarvo_pisteet, nollat[1]];
 }
 
 Array.prototype.max = function() {
