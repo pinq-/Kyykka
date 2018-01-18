@@ -6,6 +6,7 @@ var glob_piste_jaottelu;
 var glob_heitot;
 var glob_heitotyli;
 var glob_heitotali;
+var peli_lista = [];
 $( document ).ready(function() {
     var year = 2017;
     max_amount = 19;
@@ -232,7 +233,11 @@ function update_table(){
                   },
                   tooltips: {
                       mode: 'index',
-                      intersect: false
+                      callbacks: {
+                        title: function(tooltipItem) {
+                              return peli_lista[tooltipItem[0].index];
+                            }
+                      }
                   },
                   responsive: true,
                   scales: {
@@ -269,6 +274,9 @@ function laske_pisteet(objekti){
     var heittoja = 0;
     $.each(objekti, function(index) {
         heittoja ++;
+        if(index%4 == 0){
+          peli_lista.push(objekti[index].vieras_joukkue.replace(/&apos;/g, "'"));
+        }
         if(objekti[index].jaljella == max_amount*2){
             // console.log(objekti[index].kyykat);
             aloitus.push(objekti[index].kyykat);
