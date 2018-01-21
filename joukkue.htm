@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Joukkue</title>
+    <link href="TeamTyyli.css" type="text/css" rel="stylesheet">
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/hot-sneaks/jquery-ui.css" type="text/css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="TeamJS_Jquery.js"></script>
+
+</head>
+<body>
+<div id="dialog" title="Haku">
+  Hae joukkuetta:
+  <form>
+    <input type="text" id="joukkue_haku" />
+  </form>
+</div>
+<div id="Joukkue_info" class="center">
+  <div class="Team">
+    <b id="Joukkue"></b>
+    <br>
+      <b id="Nimi" class="Nimi">Hae joukkue</b>
+    <br>
+  </div>
+  <div>
+    <select id="Years">
+      <option selected="selected">2018</option>
+      <option>2017</option>
+      <option>2016</option>
+      <option>2015</option>
+      <option>2014</option>
+      <option>2013</option>
+    </select>
+  </div>
+</div>
+<div>
+  <table class = "tulokset">
+    <tr>
+      <td>Pelejä</td>
+      <td>Paras peli</td>
+      <td>Huonoin peli</td>
+      <td>ka. peli</td>
+      <td>Paras era</td>
+      <td>Huonoin era</td>
+      <td>ka. era</td>
+      <td>Paras heitto</td>
+      <td>Hauki%</td>
+      <td>Nolla%</td>
+      <td>ka. heitto</td>
+    </tr>
+    <tr>
+      <td id="peli_maarat"></td>
+      <td id="paras_peli"></td>
+      <td id="huonoin_peli"></td>
+      <td id="ka_peli"></td>
+      <td id="paras_era"></td>
+      <td id="huonoin_era"></td>
+      <td id="ka_era"></td>
+      <td id="paras_heitto"></td>
+      <td id="hauki_pro"></td>
+      <td id="nolla_pro"></td>
+      <td id="ka_heitto"></td>
+    </tr>
+  </table>
+</div>
+<div>
+    <canvas id="pisteet" height="100"></canvas>
+</div>
+<!-- <table id="game_results">
+</table> -->
+<div id="game_results">
+</div>
+
+</body></html>

@@ -3,18 +3,21 @@ canvas{
     -webkit-user-select: none;
     -ms-user-select: none;
 }
-
+.ui-dialog-titlebar-close {
+    visibility: hidden;
+}
 .center{
   text-align: center;
   vertical-align: middle;
   font-family: Arial;
   font-weight: 200;
 }
-.Player{
+.Team{
   margin: 0 auto;
   background-color: #dddddd;
   width: 50%;
 }
+
 .Nimi{
   font-size: 30px;
 }
@@ -30,68 +33,84 @@ canvas{
 table{
   margin: 0 auto;
 }
-tr:nth-child(even) {
+li {
+    list-style: none;
+    /* padding: 1px; */
+    /* width: 1%; */
+}
+.div_li div{
+	border-radius: 2px;
+	padding: 2px 10px;
+	/* background:	#b3d9ff; */
+	/* color:#152120; */
+  /* float:left; */
+}
+
+.div_li{
+  /* background:	#b3d9ff; */
+  background:	#b3d9ff;
+  float:left;
+  /* width: 100%; */
+  margin: 0 0 3px 0;
+  text-align: center;
+}
+.tulokset tr:nth-child(even) {
     background-color: #dddddd;
     font-weight: bold;
 }
-td:nth-child(even) {
+/* #game_results td{
+  width: 20%;
+} */
+
+#game_results{
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+}
+#main div:first-child,
+#main div:last-child{
+  width: 35%;
 }
 
-.TopDiv{
-    /*position: relative;*/
-    width: 80%;
-    padding: 0px;
-    margin: auto;
-
+#main {
+  width: 100%;
 }
-.inline_first{
-    float: left;
-
-    height:100%;
-    width : 20%;
-
-}
-.inline_second{
-    margin-left: 20%;
-    height:100%;
-    /*max-width:600px;*/
+#main div{
+  float:left;
 }
 
-.chart-legend{
-    text-align: center;
-    width: 80%;
-    padding: 0px;
-    margin: auto;
+#main .center{
+  width: 15%;
 }
 
-.chart-legend li span{
-    display: inline-block;
-    float:center;
-    width: 3%;
-    height: 10px;
-    margin-right: 1%;
-    margin-left: 2%;
+.voitto{
+  background:	rgb(144,255,59);
+  font-weight: bold;
 }
-.inline_pie_first{
-    float:left;
-    width : 30%;
-    height:100%;
+.havio{
+  background:	rgb(255, 51, 57);
 }
-.inline_pie_second{
-    float:left;
-    width : 30%;
-    height:100%;
+.tasapeli{
+  background:	rgb(112,112,112);
+}
+
+.erat{
+ 	float:left;
+  width: 100%;
+}
+.erat2{
+  display: none;
+  width: 100%;
 
 }
-.chart-legend li {
-    display: inline;
-}
-.pisteet{
-    width: 90%;
-    padding: 0px;
-    margin: auto;
 
+.erat div{
+  float:left;
 }
-ul{
-    padding: 0;
+
+.leveys{
+  width: 35%;
+}
+.erat .center{
+  width: 15%;
 }
