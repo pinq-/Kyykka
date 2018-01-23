@@ -14,7 +14,7 @@ $( document ).ready(function() {
     }
   }).trigger("change");
 });
-//testi vesti
+//testi vesti2
 function get_teams(callback){
   $.getJSON("http://pinq.kapsi.fi/github/workspace/index.php", {cmd : "list_teams"})
   .done(function(data){
