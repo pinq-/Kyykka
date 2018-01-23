@@ -250,7 +250,7 @@ function update_table(){
 }
 
 function hae_teidot(nimi,select_year){
-  $.getJSON("http://pinq.kapsi.fi/github/Kyykka/workspace//index.php", {cmd : "player",name: nimi, year : select_year})
+  $.getJSON("http://pinq.kapsi.fi/github/workspace/index.php", {cmd : "player",name: nimi, year : select_year})
   .done(function(data){
         if (data.pelaaja.nimi == "not found"){
           $("#Nimi").text("Pelaaja ei löydy");

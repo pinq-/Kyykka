@@ -73,7 +73,7 @@ $( ".Team" ).click(function() {
 function get_team(name){
   // console.log("haku",name);
   // console.log(haku_nimi,select_year)
-  $.getJSON("http://pinq.kapsi.fi/github/Kyykka/workspace/index.php", {cmd : "team",name: haku_nimi.replace(/'/g, "&apos;"), year : select_year},function(data){
+  $.getJSON("http://pinq.kapsi.fi/github/workspace/index.php", {cmd : "team",name: haku_nimi.replace(/'/g, "&apos;"), year : select_year},function(data){
     team_info = data;
     if (data.pelit.team != "not found"){
       reset();

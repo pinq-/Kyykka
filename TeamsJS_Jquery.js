@@ -14,9 +14,9 @@ $( document ).ready(function() {
     }
   }).trigger("change");
 });
-
+//testi vesti
 function get_teams(callback){
-  $.getJSON("http://pinq.kapsi.fi/github/Kyykka/workspace/index.php", {cmd : "list_teams"})
+  $.getJSON("http://pinq.kapsi.fi/github/workspace/index.php", {cmd : "list_teams"})
   .done(function(data){
     make_list(data);
     callback(data);
