@@ -258,7 +258,7 @@ function make_barchart(){
 }
 
 function fill_table(){
-    var erat = Array.concat(games[0],games[1]);
+    var erat = Array.prototype.concat.apply(games[0],games[1]);
 
     $("#Nimi").text(chek_name(team_info.pelit.team));
     $("#peli_maarat").text(games[3].length);
