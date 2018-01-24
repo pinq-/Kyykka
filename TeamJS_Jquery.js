@@ -12,7 +12,7 @@ $( document ).ready(function() {
 	// 	$("erat").slideUp(500);
   $("#game_results").on("click","#main", function(){
     // $(this).next('.erat').slideToggle(1000);
-    $(this).next('.erat2').slideToggle(1000);
+    $(this).next('.erat').slideToggle(1000);
   });
   $( "#dialog" ).dialog({
     show: {effect: "slide",duration: 200},
@@ -80,6 +80,7 @@ function get_team(name){
       count_wins();
       count_drows();
       fill_table();
+      Team_MakePlayerList(data.peaajat);
     }else{
       $("#Nimi").text(data.pelit.team);
     }
@@ -300,6 +301,7 @@ function make_gamelist(){
   var options = ["havio","tasapeli","voitto"];
   var jarjestys = [];
   $("#game_results").html('');
+  $("#game_results").css("height",games[0].length*4+"em");
   $.each(team_info.pelit.games,function(i,val){
       var home = Number(val.home.results.first) + Number(val.home.results.second);
       var away = Number(val.away.results.first) + Number(val.away.results.second);
@@ -334,13 +336,19 @@ function make_gamelist(){
         jarjestys[5] = options[1];
         jarjestys[6] = options[1];
       }
-
-      // $("#game_results").append('<div class="div_li"><div class="'+jarjestys[0]+'"><b>'+val.home.name+'</b></div><div class="tasoita">'+home+'</div><div class="tasoita">'+away+'</div><div class='+jarjestys[1]+'><b>'+val.away.name+'</b></div></div>');
-      // $("#game_results").append('<tr id="main"><td class="'+jarjestys[0]+'">'+val.home.name+'</td><td>'+home+'</td><td>'+away+'</td><td class='+jarjestys[1]+'>'+val.away.name+'</td></tr>');
-      // $("#game_results").append('<tr class="erat"><td>Erä 1.</td><td class="'+jarjestys[3]+'">'+val.home.results.first+'</td><td class="'+jarjestys[4]+'">'+val.away.results.first+'</td><td></td></tr>');
-      // $("#game_results").append('<tr class="erat"><td>Erä 2.</td><td class="'+jarjestys[5]+'">'+val.home.results.second+'</td><td class="'+jarjestys[6]+'">'+val.away.results.second+'</td><td></td></tr>');
       $("#game_results").append('<div id="main"><div class="'+jarjestys[0]+'">'+val.home.name+'</div><div class="center">'+home+'</div><div class="center">'+away+'</div><div class='+jarjestys[1]+'>'+val.away.name+'</div></div>');
-      $("#game_results").append('<div class="erat2"><div class="erat"><div class="leveys">Erä 1.</div><div class="'+jarjestys[3]+' center">'+val.home.results.first+'</div><div class="'+jarjestys[4]+' center">'+val.away.results.first+'</div></div>'
-                                +'<div class="erat"><div class="leveys">Erä 2.</div><div class="'+jarjestys[5]+' center">'+val.home.results.second+'</div><div class="'+jarjestys[6]+' center">'+val.away.results.second+'</div></div></div>');
+      $("#game_results").append('<div class="erat"><div class="era"><div class="leveys">Erä 1.</div><div class="'+jarjestys[3]+' center">'+val.home.results.first+'</div><div class="'+jarjestys[4]+' center">'+val.away.results.first+'</div></div>'
+                                +'<div class="era"><div class="leveys">Erä 2.</div><div class="'+jarjestys[5]+' center">'+val.home.results.second+'</div><div class="'+jarjestys[6]+' center">'+val.away.results.second+'</div></div></div>');
     });
+}
+
+function Team_MakePlayerList(){
+  Team_CountPlayerValues()
+  $("#Team_PlayerList").html('');
+
+}
+
+function Team_CountPlayerValues(){
+
+
 }

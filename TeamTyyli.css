@@ -33,43 +33,27 @@ canvas{
 table{
   margin: 0 auto;
 }
-li {
-    list-style: none;
-    /* padding: 1px; */
-    /* width: 1%; */
-}
-.div_li div{
+
+#game_results div{
 	border-radius: 2px;
-	padding: 2px 10px;
-	/* background:	#b3d9ff; */
-	/* color:#152120; */
-  /* float:left; */
 }
 
-.div_li{
-  /* background:	#b3d9ff; */
-  background:	#b3d9ff;
-  float:left;
-  /* width: 100%; */
-  margin: 0 0 3px 0;
-  text-align: center;
-}
 .tulokset tr:nth-child(even) {
     background-color: #dddddd;
     font-weight: bold;
 }
-/* #game_results td{
-  width: 20%;
-} */
+
 
 #game_results{
+  float:left;
   width: 40%;
   margin: 0 auto;
   text-align: center;
+  font-family: Arial;
 }
 #main div:first-child,
 #main div:last-child{
-  width: 35%;
+  width: 40%;
 }
 
 #main {
@@ -80,7 +64,7 @@ li {
 }
 
 #main .center{
-  width: 15%;
+  width: 10%;
 }
 
 .voitto{
@@ -94,23 +78,23 @@ li {
   background:	rgb(112,112,112);
 }
 
-.erat{
+.era{
  	float:left;
   width: 100%;
 }
-.erat2{
+.erat{
   display: none;
   width: 100%;
 
 }
 
-.erat div{
+.era div{
   float:left;
 }
 
 .leveys{
-  width: 35%;
+  width: 40%;
 }
-.erat .center{
-  width: 15%;
+.era .center{
+  width: 10%;
 }
