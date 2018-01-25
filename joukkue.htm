@@ -3,10 +3,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Joukkue</title>
     <link href="TeamTyyli.css" type="text/css" rel="stylesheet">
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/hot-sneaks/jquery-ui.css" type="text/css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/hot-sneaks/jquery-ui.css" type="text/css" rel="stylesheet" />
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/ju-1.11.4/jqc-1.11.3,dt-1.10.8/datatables.min.css"> -->
+    <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.jqueryui.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"> -->
     <script src="TeamJS_Jquery.js"></script>
 
 </head>
@@ -17,14 +22,14 @@
     <input type="text" id="joukkue_haku" />
   </form>
 </div>
-<div id="Joukkue_info" class="center">
-  <div class="Team">
+<div id="Joukkue_info" class="center" title= "jee">
+  <div class="Team ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle">
     <b id="Joukkue"></b>
     <br>
       <b id="Nimi" class="Nimi">Hae joukkue</b>
     <br>
   </div>
-  <div>
+  <div class="ui-widget">
     <select id="Years">
       <option selected="selected">2018</option>
       <option>2017</option>
@@ -35,34 +40,38 @@
     </select>
   </div>
 </div>
-<div>
-  <table class = "tulokset">
-    <tr>
-      <td>Pelejä</td>
-      <td>Paras peli</td>
-      <td>Huonoin peli</td>
-      <td>ka. peli</td>
-      <td>Paras era</td>
-      <td>Huonoin era</td>
-      <td>ka. era</td>
-      <td>Paras heitto</td>
-      <td>Hauki%</td>
-      <td>Nolla%</td>
-      <td>ka. heitto</td>
-    </tr>
-    <tr>
-      <td id="peli_maarat"></td>
-      <td id="paras_peli"></td>
-      <td id="huonoin_peli"></td>
-      <td id="ka_peli"></td>
-      <td id="paras_era"></td>
-      <td id="huonoin_era"></td>
-      <td id="ka_era"></td>
-      <td id="paras_heitto"></td>
-      <td id="hauki_pro"></td>
-      <td id="nolla_pro"></td>
-      <td id="ka_heitto"></td>
-    </tr>
+<div class="tulokset">
+  <table id="TeamrResultinfo" class = "display compact" cellpadding="0" cellspacing="0">
+    <thead>
+      <tr>
+        <td>Pelejä</td>
+        <td>Paras peli</td>
+        <td>Huonoin peli</td>
+        <td>ka. peli</td>
+        <td>Paras era</td>
+        <td>Huonoin era</td>
+        <td>ka. era</td>
+        <td>Paras heitto</td>
+        <td>Hauki%</td>
+        <td>Nolla%</td>
+        <td>ka. heitto</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td id="peli_maarat"></td>
+        <td id="paras_peli"></td>
+        <td id="huonoin_peli"></td>
+        <td id="ka_peli"></td>
+        <td id="paras_era"></td>
+        <td id="huonoin_era"></td>
+        <td id="ka_era"></td>
+        <td id="paras_heitto"></td>
+        <td id="hauki_pro"></td>
+        <td id="nolla_pro"></td>
+        <td id="ka_heitto"></td>
+      </tr>
+    </tbody>
   </table>
 </div>
 <div>
@@ -71,8 +80,21 @@
 
 <div id="game_results">
 </div>
-
-<div id="Team_PlayerList">
+<div class="Team_PlayerList">
+<table id="Team_PlayerList" class="compact" >
+    <thead>
+        <tr>
+            <th>Nimi</th>
+            <th>Eriä</th>
+            <th>pisteet</th>
+            <th>ka. heitto</th>
+            <th>nolla %</th>
+            <th>ka. heittopaikka</th>
+            <th>paras heitto</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
 </div>
-
 </body></html>

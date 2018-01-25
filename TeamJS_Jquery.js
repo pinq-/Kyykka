@@ -6,10 +6,7 @@ var glob_heitot;
 var games = [[],[],[],[],[],[]];
 var players =[[],[],[]];
 $( document ).ready(function() {
-  $(".erat2").hide();
-  // $("#main").on("click","#main",function(){
-	// 	// $(this).closest("div").nextUntil(":not(.erat)").slideUp(500);
-	// 	$("erat").slideUp(500);
+
   $("#game_results").on("click","#main", function(){
     // $(this).next('.erat').slideToggle(1000);
     $(this).next('.erat').slideToggle(1000);
@@ -80,7 +77,7 @@ function get_team(name){
       count_wins();
       count_drows();
       fill_table();
-      Team_MakePlayerList(data.peaajat);
+      Team_MakePlayerList(data.pelaajat);
     }else{
       $("#Nimi").text(data.pelit.team);
     }
@@ -259,6 +256,7 @@ function make_barchart(){
 }
 
 function fill_table(){
+
     var erat = Array.prototype.concat.apply(games[0],games[1]);
 
     $("#Nimi").text(chek_name(team_info.pelit.team));
@@ -277,6 +275,15 @@ function fill_table(){
     $("#nolla_pro").text(players[2][2]);
     $("#ka_heitto").text(players[2][3]);
     make_gamelist();
+    if($(".tulokset").css( "display" ) == "none"){
+      $('#TeamrResultinfo').DataTable({
+        paging: false,
+        searching: false,
+        "info": false,
+        "bSort" : false
+      });
+    }
+    $(".tulokset").css("display","inline");
 
 
   // console.log(erat.reduce(add, 0));
@@ -342,13 +349,49 @@ function make_gamelist(){
     });
 }
 
-function Team_MakePlayerList(){
-  Team_CountPlayerValues()
-  $("#Team_PlayerList").html('');
+function Team_MakePlayerList(PlayerList){
+  $("#Team_PlayerList tbody").html('');
+  var PlayerResults;
+  $.each(PlayerList, function(i,val){
+      PlayerResults = Team_CountPlayerValues(val);
+      $("#Team_PlayerList tbody").append('<tr><td>'+i+'</td><td>'+PlayerResults[0]+'</td><td>'+PlayerResults[4]+'</td><td>'+PlayerResults[1]+'</td><td>'+PlayerResults[3]+'</td><td>'+PlayerResults[2]+'</td><td>'+PlayerResults[5]+'</td></tr>');
+  });
+  if($(".Team_PlayerList").css( "display" ) == "none"){
+    $('#Team_PlayerList').DataTable({
+      "jQueryUI": true,
+      paging: false,
+      searching: false,
+      "info": false,
+    });
+  }
+  $(".Team_PlayerList").css("display","inline");
+
 
 }
 
-function Team_CountPlayerValues(){
+function Team_CountPlayerValues(List){
+  var PlayerResults = [[],[],[],[],[],0];
+  $.each(List, function(i,val){
+    PlayerResults[0] = i+1;
+    if(val.heitot.kyykat != 'h'){
+      PlayerResults[1].push(Number(val.heitot.kyykat));
+      // console.log(val);
+    }
+    PlayerResults[2].push(Number(val.heitot.heitto_paikka));
+    if(val.heitot.kyykat == 'h' || val.heitot.kyykat == '0'){
+      PlayerResults[3].push(Number(val.heitot.kyykat));
+      // console.log(val.heitot.kyykat);
+    }
+    if (Number(val.heitot.kyykat) > PlayerResults[5]){
+      PlayerResults[5] = Number(val.heitot.kyykat);
+    }
+  });
+  PlayerResults[4] =PlayerResults[1].reduce(add, 0)*2;
+  PlayerResults[1] =Math.round(100*(PlayerResults[1].reduce(add, 0)/PlayerResults[0]))/100;
+  PlayerResults[2] =Math.round(100*(PlayerResults[2].reduce(add, 0)/PlayerResults[0]))/100;
+  PlayerResults[3] =Math.round(1000*(PlayerResults[3].length/PlayerResults[0]))/10;
+  PlayerResults[0] = PlayerResults[0]/4;
+  // console.log(PlayerResults);
 
-
+  return PlayerResults;
 }

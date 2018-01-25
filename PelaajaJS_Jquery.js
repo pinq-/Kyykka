@@ -8,8 +8,14 @@ var glob_heitotyli;
 var glob_heitotali;
 var peli_lista = [];
 $( document ).ready(function() {
-    var year = 2017;
-    max_amount = 19;
+    var year = $(this).text();
+    if (year < 2018){
+      max_amount = 19;
+
+    }else{
+      max_amount = 20;
+
+    }
     var haku_nimi = "";
     $( ".Player" ).click(function() {
     	haku_nimi = prompt("Hae pelaajaa", $("#Nimi").text());

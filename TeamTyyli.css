@@ -22,16 +22,16 @@ canvas{
   font-size: 30px;
 }
 .tulokset{
-  text-align: center;
+  /* text-align: center; */
   margin: 0 auto;
-  width: 100%;
+  min-width: 796px;
+  display: none;
+  float:center;
+}
+
+#TeamrResultinfo {
+  width: 100% !important;
   font-family:  Arial;
-}
-.tulokset tr:nth-child(2) td{
-  padding: 2px 10px;
-}
-table{
-  margin: 0 auto;
 }
 
 #game_results div{
@@ -97,4 +97,17 @@ table{
 }
 .era .center{
   width: 10%;
+}
+.Team_PlayerList {
+  display: none;
+  width: 58%;
+  border-radius: 2px;
+  float:left;
+}
+#Team_PlayerList td{
+  text-align: center;
+}
+
+#Team_PlayerList tbody{
+  font-family: Arial;
 }
