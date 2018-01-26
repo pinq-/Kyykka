@@ -3,7 +3,8 @@ var haku_nimi = "";
 var select_year = 2017;
 var glob_heitot;
 $( document ).ready(function() {
-
+  $('#TeamrResultinfo th').tooltip({  delay:0, fade:250,position:{my:"center top-70",at:"center top"}});
+  $('#Team_PlayerList th').tooltip({  delay:0, fade:250,position:{my:"center top-50",at:"center top"}});
   $("#game_results").on("click","#main", function(){
     // $(this).next('.erat').slideToggle(1000);
     $(this).next('.erat').slideToggle(1000);
@@ -267,17 +268,18 @@ function fill_table(TeamPlayers,TeamGames,TeamName,TeamHistoy){
     $("#nolla_pro").text(TeamPlayers[2]);
     $("#ka_heitto").text(TeamPlayers[3]);
     $("#TeamHistoria").text(TeamHistoy);
-    if($(".tulokset").css( "display" ) == "none"){
+    if($(".TeamResults").css( "display" ) == "none"){
       $('#TeamrResultinfo').DataTable({
         paging: false,
         searching: false,
         "info": false,
         "bSort" : false
-      });
-    }
-    $(".tulokset").css("display","inline");
-    $(".tulokset div:eq(1)").html("<b>Joukkue tiedot</b>");
-    $(".tulokset div:eq(1)").css({"padding": "0px", "font-size":"1.4em"});
+       });
+     }
+    $(".TeamResults").css("display","inline");
+    $(".TeamResults div:eq(1)").html("<b>Joukkue tiedot</b>");
+    $(".TeamResults div:eq(1)").css({"padding": "0px", "font-size":"1.4em","min-width": "542px"});
+    $(".TeamResults div:last").css("min-width", "530px");
 
 
   // console.log(erat.reduce(add, 0));
@@ -364,7 +366,8 @@ function Team_MakePlayerList(PlayerList){
     });
     $(".Team_PlayerList").css("display","inline");
     $(".Team_PlayerList div:eq(1)").html("<b>Pelaaja tiedot</b>");
-    $(".Team_PlayerList div:eq(1)").css({"padding": "0px", "font-size":"1em"});
+    $(".Team_PlayerList div:eq(1)").css({"padding": "0px", "font-size":"1em","min-width": "385px"});
+    $(".Team_PlayerList div:last").css("min-width", "385px");
   }else{
     $('#Team_PlayerList').dataTable().fnClearTable();
   }

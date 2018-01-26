@@ -1,0 +1,86 @@
+canvas{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.center{
+  text-align: center;
+  vertical-align: middle;
+  font-family: Arial;
+  font-weight: 200;
+}
+#PlayerName{
+  margin: 0 auto;
+  background-color: #dddddd;
+  width: 50%;
+}
+.Nimi{
+  font-size: 30px;
+}
+.PlayerInfo{
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  font-family:  Arial;
+}
+
+.TopDiv{
+    /*position: relative;*/
+    width: 80%;
+    padding: 0px;
+    margin: auto;
+
+}
+.inline_first{
+    float: left;
+
+    height:100%;
+    width : 20%;
+
+}
+.inline_second{
+    margin-left: 20%;
+    height:100%;
+    /*max-width:600px;*/
+}
+
+.chart-legend{
+    text-align: center;
+    width: 80%;
+    padding: 0px;
+    margin: auto;
+}
+
+.chart-legend li span{
+    display: inline-block;
+    float:center;
+    width: 3%;
+    height: 10px;
+    margin-right: 1%;
+    margin-left: 2%;
+}
+.inline_pie_first{
+    float:left;
+    width : 30%;
+    height:100%;
+}
+.inline_pie_second{
+    float:left;
+    width : 30%;
+    height:100%;
+
+}
+.chart-legend li {
+    display: inline;
+}
+.pisteet{
+    width: 90%;
+    padding: 0px;
+    margin: auto;
+
+}
+
+/* #TeamPlayer{
+  display: none;
+} */

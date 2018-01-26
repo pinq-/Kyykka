@@ -1,0 +1,85 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Pelaaja</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/hot-sneaks/jquery-ui.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.jqueryui.min.css">
+    <script src="TeamJS_Jquery.js"></script>
+    <script src="TeamPlayerJS.js"></script>
+    <link href="TeamPlayer.css" type="text/css" rel="stylesheet">
+
+</head>
+<body id="TeamPlayer">
+        <div id="PlayerName" class="Team ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle center">
+              <b id="Nimi" class="Nimi"></b>
+              <b id="Numero" class="Nimi"></b>
+          </div>
+        <div class ="PlayerInfo">
+          <table id= "PlayerInfo" class = "display compact">
+            <thead>
+              <tr>
+                <th title = "Erät">E</th>
+                <th title = "Paras erä">PE</th>
+                <th title = "Huonoin erä">HE</th>
+                <th title = "Erienkeskiarvo" >EK</th>
+                <th title = "Heitot">H</th>
+                <th title = "Pisteet">P</th>
+                <th title = "Heittokeskiarvo">HK</th>
+                <th title = "keskiarvo 1. heittopaikalta">1.</th>
+                <th title = "keskiarvo 2. heittopaikalta">2.</th>
+                <th title = "keskiarvo 3. heittopaikalta">3.</th>
+                <th title = "keskiarvo 4. heittopaikalta">4.</th>
+                <th title = "Paras heitto">PH</th>
+                <th title = "Haukiprosentti">H%</th>
+                <th title = "Nolla pistettä heitoista">N%</th>
+                <th title = "Pisin nollaputki">NP</th>
+                <th title = "Joulukuuset">JK</th>
+              </tr>
+            </thead>
+            <tr>
+              <td  id= "era_maara"></td>
+              <td  id= "max_era"></td>
+              <td  id= "min_era"></td>
+              <td  id= "average_era"></td>
+              <td  id= "heitot_maara"></td>
+              <td  id= "pisteet_maara"></td>
+              <td   id= "pisteetper_maara"></td>
+              <td   id= "pisteetper_eka"></td>
+              <td   id= "pisteetper_tok"></td>
+              <td   id= "pisteetper_kol"></td>
+              <td   id= "pisteetper_nel"></td>
+              <td  id= "paras_heitto"></td>
+              <td  id= "hauki_prosentti"></td>
+              <td  id= "nolla_prosentti"></td>
+              <td  id= "nolla_putki"></td>
+              <td  id= "Joulukuuset"></td>
+            </tr>
+          </table>
+        </div>
+    <div>
+        <canvas id="pisteet" height="100"></canvas>
+    </div>
+    <div id="js-legend"  class="chart-legend"></div>
+    <div id="piiraat" class="pisteet">
+        <div class ="inline_pie_first" id ="first_pie">
+            <canvas  id="heitotyli" height="150"></canvas>
+        <div class = "center" id = "maara_1"></div>
+        </div>
+        <div class = "inline_pie_second" id ="second_pie">
+            <canvas id="heitotali" height="150"></canvas>
+        <div class = "center" id = "maara_2"></div>
+        </div>
+        <div class = "inline_pie_second" id ="tree_pie">
+            <canvas id="aloitusheitot" height="150"></canvas>
+        <div class = "center" id = "maara_3"></div>
+        </div>
+    </div>
+</body>
+
+</html>

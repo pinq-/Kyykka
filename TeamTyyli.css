@@ -21,7 +21,8 @@ canvas{
 .Nimi{
   font-size: 30px;
 }
-.tulokset{
+
+.TeamResults{
   /* text-align: center; */
   margin: 0 auto;
   min-width: 796px;
@@ -37,11 +38,6 @@ canvas{
 
 #game_results div{
 	border-radius: 2px;
-}
-
-.tulokset tr:nth-child(even) {
-    background-color: #dddddd;
-    font-weight: bold;
 }
 
 
@@ -106,10 +102,9 @@ canvas{
   float:left;
   text-align: center;
 }
-/* #Team_PlayerList td{
-  text-align: center;
-} */
-
+#Team_PlayerList tbody tr:hover td{
+    background-color: rgb(220,220,220) !important;
+}
 #Team_PlayerList tbody{
   font-family: Arial;
 }

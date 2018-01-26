@@ -6,12 +6,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/hot-sneaks/jquery-ui.css" type="text/css" rel="stylesheet" />
-    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/ju-1.11.4/jqc-1.11.3,dt-1.10.8/datatables.min.css"> -->
+    <link href="https://code.jquery.com/ui/1.12.1/themes/hot-sneaks/jquery-ui.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.jqueryui.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"> -->
     <script src="TeamJS_Jquery.js"></script>
 
 </head>
@@ -22,7 +20,7 @@
     <input type="text" id="joukkue_haku" />
   </form>
 </div>
-<div id="Joukkue_info" class="center" title= "jee">
+<div id="Joukkue_info" class="center">
   <div class="Team ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle">
     <b id="Joukkue"></b>
     <br>
@@ -40,22 +38,22 @@
     </select>
   </div>
 </div>
-<div class="tulokset">
-  <table id="TeamrResultinfo" class = "display compact" title= "kala">
+<div class="TeamResults">
+  <table id="TeamrResultinfo" class = "display compact">
     <thead>
       <tr>
-        <td>Pelejä</td>
-        <td>Paras peli</td>
-        <td>Huonoin peli</td>
-        <td>ka. peli</td>
-        <td>Paras era</td>
-        <td>Huonoin era</td>
-        <td>ka. era</td>
-        <td>Paras heitto</td>
-        <td>Hauki%</td>
-        <td>Nolla%</td>
-        <td>ka. heitto</td>
-        <td>Edellisiä kausia</td>
+        <th title="Pelit">P</th>
+        <th title = "Paras peli">Pp</th>
+        <th title = "Huonoin peli">Hp</th>
+        <th title = "Peliekeskiarvo">PK</th>
+        <th title = "Paras era">Pe</th>
+        <th title = "Huonoin era">He</th>
+        <th title = "Eräkeskiarvo" >EK</th>
+        <th title = "Paras heitto">Ph</th>
+        <th title = "Hauki prosentti heitoissa">H%</th>
+        <th title = "Nolla pistettä heitoista">N%</th>
+        <th title = "Heittokeskiarvo">HK</th>
+        <th title = "Kuinka monta kautta joukkueella on takana">Ikä</th>
       </tr>
     </thead>
     <tbody>
@@ -83,17 +81,17 @@
 <div id="game_results">
 </div>
 <div class="Team_PlayerList">
-<table id="Team_PlayerList" class="compact" >
+<table id="Team_PlayerList" class="compact row-border" >
     <thead>
         <tr>
             <th>Nimi</th>
-            <th>Eriä</th>
-            <th>pisteet</th>
-            <th>ka. heitto</th>
-            <th>nolla %</th>
-            <th>ka. heittopaikka</th>
-            <th>paras heitto</th>
-            <th>Edellisä kausia</th>
+            <th title = "Pelatut erät">E</th>
+            <th title = "Pisteet">P</th>
+            <th title = "Kyykkää per heitto">KPH</th>
+            <th title = "Nolla pistettä heitoista">N%</th>
+            <th title = "Keskimääräinen heittopaikka">HP/</th>
+            <th title = "Paras heitto">PH</th>
+            <th title = "Kuinka monta kautta on takana">K</th>
         </tr>
     </thead>
     <tbody>
