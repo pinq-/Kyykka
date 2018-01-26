@@ -343,7 +343,6 @@ function pisteiden_taulukointi(lista,piste_lista){
     var eraScore = [];
     var paikat = [[],[],[],[]];
     var nollat = [0,0];
-    var erat = [0,0];
     $.each(piste_lista, function(i,val){
       if( val == 0){
         nollat[0] += 1;

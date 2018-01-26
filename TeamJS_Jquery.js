@@ -253,7 +253,7 @@ function make_barchart(TeamGames){
 
 function fill_table(TeamPlayers,TeamGames,TeamName,TeamHistoy){
 
-    var erat = Array.prototype.concat.apply(TeamGames[0],TeamGames[1]);
+    var TeamErat = Array.prototype.concat.apply(TeamGames[0],TeamGames[1]);
 
     $("#Nimi").text(chek_name(TeamName));
     $("#peli_maarat").text(TeamGames[3].length);
@@ -262,9 +262,9 @@ function fill_table(TeamPlayers,TeamGames,TeamName,TeamHistoy){
     $("#huonoin_peli").text(TeamGames[3].max());
     $("#ka_peli").text(Math.round(100*(TeamGames[3].reduce(add, 0)/TeamGames[3].length))/100);
 
-    $("#paras_era").text(erat.min());
-    $("#huonoin_era").text(erat.max());
-    $("#ka_era").text(Math.round(100*(erat.reduce(add, 0)/erat.length))/100);
+    $("#paras_era").text(TeamErat.min());
+    $("#huonoin_era").text(TeamErat.max());
+    $("#ka_era").text(Math.round(100*(TeamErat.reduce(add, 0)/TeamErat.length))/100);
 
     $("#paras_heitto").text(TeamPlayers[0]);
     $("#hauki_pro").text(TeamPlayers[1]);
