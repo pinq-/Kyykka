@@ -27,6 +27,7 @@ canvas{
   min-width: 796px;
   display: none;
   float:center;
+  text-align: center;
 }
 
 #TeamrResultinfo {
@@ -103,10 +104,11 @@ canvas{
   width: 58%;
   border-radius: 2px;
   float:left;
-}
-#Team_PlayerList td{
   text-align: center;
 }
+/* #Team_PlayerList td{
+  text-align: center;
+} */
 
 #Team_PlayerList tbody{
   font-family: Arial;

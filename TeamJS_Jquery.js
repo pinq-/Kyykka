@@ -1,10 +1,7 @@
-var team_info = null;
 var max_amount;
 var haku_nimi = "";
 var select_year = 2017;
 var glob_heitot;
-var games = [[],[],[],[],[],[]];
-var players =[[],[],[]];
 $( document ).ready(function() {
 
   $("#game_results").on("click","#main", function(){
@@ -71,39 +68,33 @@ function get_team(name){
   // console.log("haku",name);
   // console.log(haku_nimi,select_year)
   $.getJSON("http://pinq.kapsi.fi/github/workspace/index.php", {cmd : "team",name: haku_nimi.replace(/'/g, "&apos;"), year : select_year},function(data){
-    team_info = data;
     if (data.pelit.team != "not found"){
-      reset();
-      count_wins();
-      count_drows();
-      fill_table();
+      var TeamGames = count_wins(data.pelit.games,data.pelit.team);
+      var PalyersData = count_drows(data.pelaajat);
+      fill_table(PalyersData, TeamGames, data.pelit.team, data.pelit.TeamHistory);
       Team_MakePlayerList(data.pelaajat);
+      make_gamelist(data.pelit.games,TeamGames[0].length);
     }else{
       $("#Nimi").text(data.pelit.team);
     }
   });
 };
 
-function reset(){
-  games = [[],[],[],[],[],[]];
-  players =[[],[],[]];
-};
-
-function count_wins(){
-  // console.log(team_info.pelit);
+function count_wins(TeamGames,TeamName){
+  var games = [[],[],[],[],[],[]];
   var wins = [];
   var loses = [];
   var even = [];
-  $.each(team_info.pelit.games,function(i,val){
+  $.each(TeamGames,function(i,val){
       var home = Number(val.home.results.first) + Number(val.home.results.second);
       var away = Number(val.away.results.first) + Number(val.away.results.second);
 
-      if (val.home.name == team_info.pelit.team && home < away){
+      if (val.home.name == TeamName && home < away){
         wins.push(val.id);
         games[5].push(2);
 
       }
-      else if(val.away.name == team_info.pelit.team  && home > away){
+      else if(val.away.name == TeamName  && home > away){
         wins.push(val.id);
         games[5].push(2);
 
@@ -116,7 +107,7 @@ function count_wins(){
         loses.push(val.id);
         games[5].push(0);
       }
-      if (val.home.name == team_info.pelit.team){
+      if (val.home.name == TeamName){
         games[0].push(val.home.results.first);
         games[1].push(val.home.results.second);
         games[2].push((Number(val.home.results.first) + Number(val.home.results.second))/2);
@@ -131,10 +122,11 @@ function count_wins(){
         games[4].push(val.home.name);
       }
   });
-  make_barchart();
+  make_barchart(games);
+  return games;
 }
 
-function count_drows(){
+function count_drows(ListPlayers){
 
   var names = [];
   var best = 0;
@@ -142,46 +134,46 @@ function count_drows(){
   var amount = 0;
   var zeros = 0;
   var points= 0;
-  $.each(team_info.pelaajat, function(i,val){
+  var players = [];
+  // console.log(ListPlayers);
+  $.each(ListPlayers, function(i,val){
       trows =[];
       names.push(i);
-      $.each(val,function(i,val2){
-        // console.log(val2.heitot.kyykat);
-        trows.push(val2.heitot.kyykat);
+      // console.log(i,val.heitot);
+      $.each(val.heitot,function(i,val2){
+        trows.push(val2.kyykat);
         amount ++;
-        if (Number(val2.heitot.kyykat) > best){
-          best = val2.heitot.kyykat;
+        if (Number(val2.kyykat) > best){
+          best = val2.kyykat;
         }
-        if (val2.heitot.kyykat == "h"){
+        if (val2.kyykat == "h"){
           hauki ++;
         }else{
-          points += Number(val2.heitot.kyykat);
+          points += Number(val2.kyykat);
         }
-        if (val2.heitot.kyykat == "h" || val2.heitot.kyykat == "0"){
+        if (val2.kyykat == "h" || val2.kyykat == "0"){
             zeros ++;
         }
       });
-    players[1].push(trows);
   });
-  players[0].push(names);
   // console.log(amount,hauki,zeros,points);
   hauki = Math.round(10000*(hauki/amount))/100;
   zeros = Math.round(10000*(zeros/amount))/100;
   points = Math.round(100*(points/amount))/100;
-  players[2][0] = best;
-  players[2][1] = hauki;
-  players[2][2] = zeros;
-  players[2][3] = points;
-
+  players[0] = best;
+  players[1] = hauki;
+  players[2] = zeros;
+  players[3] = points;
+  return players;
 }
 
-function make_barchart(){
+function make_barchart(TeamGames){
   if (glob_heitot != null){
     glob_heitot.destroy();
   }
   var ensimmainen = [];
   var toinen = [];
-  $.each(games[5],function(i,val){
+  $.each(TeamGames[5],function(i,val){
     if (val == 2){
       ensimmainen.push('rgb(144,255,59)');
       toinen.push('rgb(203,255,162)');
@@ -196,12 +188,12 @@ function make_barchart(){
     }
   })
   var ctx4 = document.getElementById("pisteet").getContext('2d');
-  var keskiarvo = Math.round(100*(games[2].reduce(add, 0)/games[2].length))/100;
-  keskiarvo = Array.apply(null, Array(games[2].length+1)).map(Number.prototype.valueOf,keskiarvo)
+  var keskiarvo = Math.round(100*(TeamGames[2].reduce(add, 0)/TeamGames[2].length))/100;
+  keskiarvo = Array.apply(null, Array(TeamGames[2].length+1)).map(Number.prototype.valueOf,keskiarvo)
   glob_heitot = new Chart(ctx4, {
       type: 'bar',
       data: {
-          labels: games[3],
+          labels: TeamGames[3],
           datasets: [{
             type: 'line',
             label: 'keskiarvo',
@@ -216,19 +208,19 @@ function make_barchart(){
             borderColor: 'rgb(48, 63, 92)',
             borderWidth: 4,
             fill: false,
-            data: games[2]
+            data: TeamGames[2]
           },{
               type: 'bar',
               label: 'Ensimmäinen',
               backgroundColor: ensimmainen,
               stack: 'vuoro 0',
-              data: games[0]
+              data: TeamGames[0]
           }, {
               type: 'bar',
               label: 'Toinen',
               backgroundColor: toinen,
               stack: 'vuoro 0',
-              data: games[1]
+              data: TeamGames[1]
           }]
 
       },
@@ -241,7 +233,7 @@ function make_barchart(){
                       mode: 'index',
                       callbacks: {
                         title: function(tooltipItem) {
-                              return chek_name(games[4][tooltipItem[0].index]);
+                              return chek_name(TeamGames[4][tooltipItem[0].index]);
                             }
                       }
                   },
@@ -255,26 +247,26 @@ function make_barchart(){
   });
 }
 
-function fill_table(){
+function fill_table(TeamPlayers,TeamGames,TeamName,TeamHistoy){
 
-    var erat = Array.prototype.concat.apply(games[0],games[1]);
+    var erat = Array.prototype.concat.apply(TeamGames[0],TeamGames[1]);
 
-    $("#Nimi").text(chek_name(team_info.pelit.team));
-    $("#peli_maarat").text(games[3].length);
+    $("#Nimi").text(chek_name(TeamName));
+    $("#peli_maarat").text(TeamGames[3].length);
 
-    $("#paras_peli").text(games[3].min());
-    $("#huonoin_peli").text(games[3].max());
-    $("#ka_peli").text(Math.round(100*(games[3].reduce(add, 0)/games[3].length))/100);
+    $("#paras_peli").text(TeamGames[3].min());
+    $("#huonoin_peli").text(TeamGames[3].max());
+    $("#ka_peli").text(Math.round(100*(TeamGames[3].reduce(add, 0)/TeamGames[3].length))/100);
 
     $("#paras_era").text(erat.min());
     $("#huonoin_era").text(erat.max());
     $("#ka_era").text(Math.round(100*(erat.reduce(add, 0)/erat.length))/100);
 
-    $("#paras_heitto").text(players[2][0]);
-    $("#hauki_pro").text(players[2][1]);
-    $("#nolla_pro").text(players[2][2]);
-    $("#ka_heitto").text(players[2][3]);
-    make_gamelist();
+    $("#paras_heitto").text(TeamPlayers[0]);
+    $("#hauki_pro").text(TeamPlayers[1]);
+    $("#nolla_pro").text(TeamPlayers[2]);
+    $("#ka_heitto").text(TeamPlayers[3]);
+    $("#TeamHistoria").text(TeamHistoy);
     if($(".tulokset").css( "display" ) == "none"){
       $('#TeamrResultinfo').DataTable({
         paging: false,
@@ -284,6 +276,8 @@ function fill_table(){
       });
     }
     $(".tulokset").css("display","inline");
+    $(".tulokset div:eq(1)").html("<b>Joukkue tiedot</b>");
+    $(".tulokset div:eq(1)").css({"padding": "0px", "font-size":"1.4em"});
 
 
   // console.log(erat.reduce(add, 0));
@@ -304,12 +298,12 @@ Array.prototype.min = function() {
   return Math.min.apply(null, this);
 };
 
-function make_gamelist(){
+function make_gamelist(games,AmountGames){
   var options = ["havio","tasapeli","voitto"];
   var jarjestys = [];
   $("#game_results").html('');
-  $("#game_results").css("height",games[0].length*4+"em");
-  $.each(team_info.pelit.games,function(i,val){
+  $("#game_results").css("height",AmountGames*4+"em");
+  $.each(games,function(i,val){
       var home = Number(val.home.results.first) + Number(val.home.results.second);
       var away = Number(val.away.results.first) + Number(val.away.results.second);
 
@@ -350,40 +344,63 @@ function make_gamelist(){
 }
 
 function Team_MakePlayerList(PlayerList){
-  $("#Team_PlayerList tbody").html('');
-  var PlayerResults;
-  $.each(PlayerList, function(i,val){
-      PlayerResults = Team_CountPlayerValues(val);
-      $("#Team_PlayerList tbody").append('<tr><td>'+i+'</td><td>'+PlayerResults[0]+'</td><td>'+PlayerResults[4]+'</td><td>'+PlayerResults[1]+'</td><td>'+PlayerResults[3]+'</td><td>'+PlayerResults[2]+'</td><td>'+PlayerResults[5]+'</td></tr>');
-  });
+  // $("#Team_PlayerList tbody").html('');
   if($(".Team_PlayerList").css( "display" ) == "none"){
     $('#Team_PlayerList').DataTable({
       "jQueryUI": true,
       paging: false,
       searching: false,
       "info": false,
+      columns: [
+        { data: 'Nimi' },
+        { data: 'Eriä' },
+        { data: 'pisteet' },
+        { data: 'ka-heitto' },
+        { data: 'nolla' },
+        { data: 'ka-heittopaikka' },
+        { data: 'parasheitto' },
+        { data: 'PelaajaHistoria' }
+      ]
     });
+    $(".Team_PlayerList").css("display","inline");
+    $(".Team_PlayerList div:eq(1)").html("<b>Pelaaja tiedot</b>");
+    $(".Team_PlayerList div:eq(1)").css({"padding": "0px", "font-size":"1em"});
+  }else{
+    $('#Team_PlayerList').dataTable().fnClearTable();
   }
-  $(".Team_PlayerList").css("display","inline");
-
-
+  var PlayerResults;
+  $.each(PlayerList, function(i,val){
+    PlayerResults = Team_CountPlayerValues(val.heitot);
+      var data =[{
+        "Nimi": i,
+        "Eriä" : PlayerResults[0],
+        "pisteet":PlayerResults[4],
+        "ka-heitto": PlayerResults[1],
+        "nolla": PlayerResults[3],
+        "ka-heittopaikka": PlayerResults[2],
+        "parasheitto": PlayerResults[5],
+        "PelaajaHistoria": val.historia
+      }];
+    $('#Team_PlayerList').dataTable().fnAddData(data);
+  });
 }
 
 function Team_CountPlayerValues(List){
+  // console.log(List);
   var PlayerResults = [[],[],[],[],[],0];
   $.each(List, function(i,val){
     PlayerResults[0] = i+1;
-    if(val.heitot.kyykat != 'h'){
-      PlayerResults[1].push(Number(val.heitot.kyykat));
+    if(val.kyykat != 'h'){
+      PlayerResults[1].push(Number(val.kyykat));
       // console.log(val);
     }
-    PlayerResults[2].push(Number(val.heitot.heitto_paikka));
-    if(val.heitot.kyykat == 'h' || val.heitot.kyykat == '0'){
-      PlayerResults[3].push(Number(val.heitot.kyykat));
-      // console.log(val.heitot.kyykat);
+    PlayerResults[2].push(Number(val.heitto_paikka));
+    if(val.kyykat == 'h' || val.kyykat == '0'){
+      PlayerResults[3].push(Number(val.kyykat));
+      // console.log(val.kyykat);
     }
-    if (Number(val.heitot.kyykat) > PlayerResults[5]){
-      PlayerResults[5] = Number(val.heitot.kyykat);
+    if (Number(val.kyykat) > PlayerResults[5]){
+      PlayerResults[5] = Number(val.kyykat);
     }
   });
   PlayerResults[4] =PlayerResults[1].reduce(add, 0)*2;
