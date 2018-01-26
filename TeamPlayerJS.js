@@ -1,28 +1,42 @@
 //functions from other file
-var max_amount;
-var glob_heitot;
 var glob_aloitusheitot;
 var glob_heitotyli;
 var glob_heitotali;
+var PlayerGlobalTrows;
 $( document ).ready(function() {
-  $('#PlayerInfo th').tooltip({  delay:0, fade:250,position:{my:"center top-40",at:"center top"}});
-    max_amount = 20;
-    hae_teidot("santeri pöyhönen","2018");
+    $( "#TeamPlayer" ).dialog({
+      autoOpen: false,
+      width: 900,
+      height: 700,
+      show:{effect: "slide",duration: 200},
+      hide:{effect: "slide",duration: 200}
+    });
 });
-function hae_teidot(nimi,select_year){
+function hae_tiedot(nimi){
+  var max_amount;
   var Trow_Names =["Hauki", "Virkamies","1", "2", "3", "4", "5","6",">6"];
+  var select_year = $("#Years option:selected").text();
+  if (nimi != ""){
+    if (select_year < 2018){
+      max_amount = 19;
+
+    }else{
+      max_amount = 20;
+
+    }
+  }
   $.getJSON("http://pinq.kapsi.fi/github/workspace/index.php", {cmd : "player",name: nimi, year : select_year})
   .done(function(data){
     if (data.pelaaja.nimi == "not found"){
       $("#Nimi").text("Pelaaja ei löydy");
     }
     else{
-      var PlayerPoints = PlayerCountPoints(data.heitot);
+      $('#PlayerInfo th').tooltip({  delay:0, fade:250,position:{my:"center top-40",at:"center top"}});
+      var PlayerPoints = PlayerCountPoints(data.heitot,max_amount);
       var PlayerPointsDis = pisteiden_taulukointi(data.heitot,PlayerPoints[0]);
-      // console.log(PlayerPointsDis);
       UpdatePlayerinfo(data.pelaaja.nimi,data.pelaaja.numero,PlayerPoints,PlayerPointsDis);
       Update_barchar(PlayerPoints[4][3],PlayerPointsDis,PlayerPoints[5]);
-      Update_pies(PlayerPoints,Trow_Names);
+      Update_pies(PlayerPoints,Trow_Names,max_amount);
     }
   });
 }
@@ -43,7 +57,7 @@ function UpdatePlayerinfo(Pname,Pnumber,PlayerPoints,PPointsDis){
   $("#pisteetper_tok").text(PPointsDis[7][1][0]+"["+PPointsDis[7][1][1]+"]");
   $("#pisteetper_kol").text(PPointsDis[7][2][0]+"["+PPointsDis[7][2][1]+"]");
   $("#pisteetper_nel").text(PPointsDis[7][3][0]+"["+PPointsDis[7][3][1]+"]");
-  $("#paras_heitto").text(PlayerPoints[0].max()/2);
+  $("#PlayerBestTrow").text(PlayerPoints[0].max()/2);
   $("#hauki_prosentti").text(PlayerPoints[4][0]+"%");
   $("#nolla_prosentti").text(PlayerPoints[4][4]+"%");
   $("#nolla_putki").text(PPointsDis[6]);
@@ -57,12 +71,12 @@ function UpdatePlayerinfo(Pname,Pnumber,PlayerPoints,PPointsDis){
       "bSort" : false
     });
     $(".PlayerInfo div:eq(1)").html("<b>Pelaaja tiedot</b>");
-    $(".PlayerInfo div:eq(1)").css({"padding": "0px", "font-size":"1.4em","min-width": "542px"});
+    $(".PlayerInfo div:eq(1)").css({"padding": "0px", "font-size":"1em","min-width": "542px"});
     $(".PlayerInfo div:last").css("min-width", "530px");
   }
 }
 
-function Update_pies(PlayerPoints,Trow_Names){
+function Update_pies(PlayerPoints,Trow_Names,max_amount){
 
   if (glob_heitotyli != null){
     glob_heitotyli.destroy();
@@ -178,14 +192,14 @@ function Update_pies(PlayerPoints,Trow_Names){
           }
       });
   }else{$("#maara_3").text('')};
-  if (glob_heitot == null){
+  if (PlayerGlobalTrows == null){
     $("#js-legend").append(glob_heitotyli.generateLegend());
   }
 }
 function Update_barchar(AvrageHeitto,PlayerPointsDis,Gamelist){
 
-  if (glob_heitot != null){
-    glob_heitot.destroy();
+  if (PlayerGlobalTrows != null){
+    PlayerGlobalTrows.destroy();
   }
 
   var ctx4 = document.getElementById("PlayerPoints").getContext('2d');
@@ -194,7 +208,7 @@ function Update_barchar(AvrageHeitto,PlayerPointsDis,Gamelist){
   $.each(PlayerPointsDis[5],function(i,val){
     PlayerPointsDis[5][i] = val/4;
   });
-  glob_heitot = new Chart(ctx4, {
+  PlayerGlobalTrows= new Chart(ctx4, {
       type: 'bar',
       data: {
           labels: PlayerPointsDis[4],
@@ -264,7 +278,7 @@ function Update_barchar(AvrageHeitto,PlayerPointsDis,Gamelist){
 }
 
 
-function PlayerCountPoints(TrowList){
+function PlayerCountPoints(TrowList,max_amount){
     var alle = [];
     var yli = [];
     var aloitus = [];
@@ -380,6 +394,13 @@ function pisteiden_taulukointi(lista,piste_lista){
     });
     return     [aloitus, toka, kolmas, neljas, label ,eraScore, nollat[1], paikat];
 }
+function chek_name(name){
+  return name.replace(/&apos;/g, "'")
+}
+
+function add(a, b) {
+    return Number(a) + Number(b);
+}
 
 Array.prototype.max = function() {
   return Math.max.apply(null, this);
@@ -388,7 +409,3 @@ Array.prototype.max = function() {
 Array.prototype.min = function() {
   return Math.min.apply(null, this);
 };
-
-function add(a, b) {
-    return a + b;
-}

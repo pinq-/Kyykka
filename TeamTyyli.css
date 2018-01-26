@@ -3,9 +3,6 @@ canvas{
     -webkit-user-select: none;
     -ms-user-select: none;
 }
-.ui-dialog-titlebar-close {
-    visibility: hidden;
-}
 .center{
   text-align: center;
   vertical-align: middle;

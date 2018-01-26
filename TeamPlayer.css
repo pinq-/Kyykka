@@ -12,8 +12,8 @@ canvas{
 }
 #PlayerName{
   margin: 0 auto;
-  background-color: #dddddd;
   width: 50%;
+  text-align: center;
 }
 .Nimi{
   font-size: 30px;
@@ -75,12 +75,7 @@ canvas{
     display: inline;
 }
 .pisteet{
-    width: 90%;
     padding: 0px;
     margin: auto;
 
-}
-
-#TeamPlayer{
-  display: none;
 }

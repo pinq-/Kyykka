@@ -1,7 +1,7 @@
 var max_amount;
 var haku_nimi = "";
 var select_year = 2017;
-var glob_heitot;
+var TeamGlobalTrows;
 $( document ).ready(function() {
   $('#TeamrResultinfo th').tooltip({  delay:0, fade:250,position:{my:"center top-70",at:"center top"}});
   $('#Team_PlayerList th').tooltip({  delay:0, fade:250,position:{my:"center top-50",at:"center top"}});
@@ -15,7 +15,6 @@ $( document ).ready(function() {
     autoOpen: false,
     open: function(event, ui) {
        $("#joukkue_haku").val(""),
-       $(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
        $(this).off('submit').on('submit', function () {
          $( this ).dialog( "close" );
          haku_nimi = $("#joukkue_haku").val();
@@ -41,9 +40,6 @@ $( document ).ready(function() {
 $( ".Team" ).click(function() {
   $( "#dialog" ).dialog( "open" );
 });
-$( "#testipelaaja" ).click(function() {
-  $("#TeamPlayer").css("display","inline");
-});
   // $( ".Team" ).click(function() {
   //   haku_nimi = prompt("Hae joukkue", $("#Nimi").text());
   //   if (haku_nimi != "" && haku_nimi != "not found" && haku_nimi != "Hae joukkue"){
@@ -66,6 +62,11 @@ $( "#testipelaaja" ).click(function() {
         get_team(haku_nimi);
       }
   }).trigger("change");
+  $('#Team_PlayerList tbody').on( 'click', 'tr', function () {
+      var name = $(this).closest('tr').children('td:first').text().replace(/#+|[0-9]/g,'').trim();
+      hae_tiedot(name);
+      $( '#TeamPlayer' ).dialog( 'open' );
+    });
 });
 
 function get_team(name){
@@ -172,8 +173,8 @@ function count_drows(ListPlayers){
 }
 
 function make_barchart(TeamGames){
-  if (glob_heitot != null){
-    glob_heitot.destroy();
+  if (TeamGlobalTrows != null){
+    TeamGlobalTrows.destroy();
   }
   var ensimmainen = [];
   var toinen = [];
@@ -194,7 +195,7 @@ function make_barchart(TeamGames){
   var ctx4 = document.getElementById("TeamPoints").getContext('2d');
   var keskiarvo = Math.round(100*(TeamGames[2].reduce(add, 0)/TeamGames[2].length))/100;
   keskiarvo = Array.apply(null, Array(TeamGames[2].length+1)).map(Number.prototype.valueOf,keskiarvo)
-  glob_heitot = new Chart(ctx4, {
+  TeamGlobalTrows = new Chart(ctx4, {
       type: 'bar',
       data: {
           labels: TeamGames[3],
@@ -287,21 +288,6 @@ function fill_table(TeamPlayers,TeamGames,TeamName,TeamHistoy){
 
   // console.log(erat.reduce(add, 0));
 }
-function chek_name(name){
-  return name.replace(/&apos;/g, "'")
-}
-
-function add(a, b) {
-    return Number(a) + Number(b);
-}
-
-Array.prototype.max = function() {
-  return Math.max.apply(null, this);
-};
-
-Array.prototype.min = function() {
-  return Math.min.apply(null, this);
-};
 
 function make_gamelist(games,AmountGames){
   var options = ["havio","tasapeli","voitto"];
