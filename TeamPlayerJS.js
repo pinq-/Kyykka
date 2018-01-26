@@ -29,7 +29,7 @@ function hae_teidot(nimi,select_year){
 
 function UpdatePlayerinfo(Pname,Pnumber,PlayerPoints,PPointsDis){
 
-  $("#Nimi").text(Pname);
+  $("#PlayerName").text(Pname);
   $("#Numero").text("#"+Pnumber);
 
   $("#era_maara").text(PPointsDis[4].length);
@@ -188,7 +188,7 @@ function Update_barchar(AvrageHeitto,PlayerPointsDis,Gamelist){
     glob_heitot.destroy();
   }
 
-  var ctx4 = document.getElementById("pisteet").getContext('2d');
+  var ctx4 = document.getElementById("PlayerPoints").getContext('2d');
   AvrageHeitto = Array.apply(null, Array(PlayerPointsDis[0].length)).map(Number.prototype.valueOf,AvrageHeitto);
   var AvrageList = [];
   $.each(PlayerPointsDis[5],function(i,val){

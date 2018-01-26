@@ -41,6 +41,9 @@ $( document ).ready(function() {
 $( ".Team" ).click(function() {
   $( "#dialog" ).dialog( "open" );
 });
+$( "#testipelaaja" ).click(function() {
+  $("#TeamPlayer").css("display","inline");
+});
   // $( ".Team" ).click(function() {
   //   haku_nimi = prompt("Hae joukkue", $("#Nimi").text());
   //   if (haku_nimi != "" && haku_nimi != "not found" && haku_nimi != "Hae joukkue"){

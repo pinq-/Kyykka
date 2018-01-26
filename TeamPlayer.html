@@ -1,23 +1,6 @@
-<html>
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>Pelaaja</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-    <link href="https://code.jquery.com/ui/1.12.1/themes/hot-sneaks/jquery-ui.css" type="text/css" rel="stylesheet" />
-    <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.jqueryui.min.css">
-    <script src="TeamJS_Jquery.js"></script>
-    <script src="TeamPlayerJS.js"></script>
-    <link href="TeamPlayer.css" type="text/css" rel="stylesheet">
-
-</head>
-<body id="TeamPlayer">
+<section id="TeamPlayer">
         <div id="PlayerName" class="Team ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle center">
-              <b id="Nimi" class="Nimi"></b>
+              <b id="PlayerName" class="Nimi"></b>
               <b id="Numero" class="Nimi"></b>
           </div>
         <div class ="PlayerInfo">
@@ -63,7 +46,7 @@
           </table>
         </div>
     <div>
-        <canvas id="pisteet" height="100"></canvas>
+        <canvas id="PlayerPoints" height="100"></canvas>
     </div>
     <div id="js-legend"  class="chart-legend"></div>
     <div id="piiraat" class="pisteet">
@@ -80,6 +63,4 @@
         <div class = "center" id = "maara_3"></div>
         </div>
     </div>
-</body>
-
-</html>
+</section>
