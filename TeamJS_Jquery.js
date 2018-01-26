@@ -191,7 +191,7 @@ function make_barchart(TeamGames){
       toinen.push('rgb(255, 118, 123)');
     }
   })
-  var ctx4 = document.getElementById("pisteet").getContext('2d');
+  var ctx4 = document.getElementById("TeamPlayer").getContext('2d');
   var keskiarvo = Math.round(100*(TeamGames[2].reduce(add, 0)/TeamGames[2].length))/100;
   keskiarvo = Array.apply(null, Array(TeamGames[2].length+1)).map(Number.prototype.valueOf,keskiarvo)
   glob_heitot = new Chart(ctx4, {
