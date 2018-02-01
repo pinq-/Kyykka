@@ -1,6 +1,13 @@
 var glob_GameHomeTrows;
 var glob_GameAwayTrows;
 $( document ).ready(function() {
+  $( "#GameFullPage" ).dialog({
+    autoOpen: false,
+    width: 900,
+    height: 700,
+    show:{effect: "slide",duration: 200},
+    hide:{effect: "slide",duration: 200}
+  });
   // GetGameResults(1142,2018);
 });
 function GetGameResults(GameID,select_year){

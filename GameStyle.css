@@ -60,9 +60,6 @@ table {
   text-align: center;
   width: 100%;
 }
-.GameFullPage{
-  display: none;
-}
 .GamePoints{
   width: 10%;
   float:right;

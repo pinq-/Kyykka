@@ -65,6 +65,7 @@ $( ".Team" ).click(function() {
   $('#game_results').on( 'click', 'div .TeamMore', function () {
       var SearchGame = $(this).attr('href');
       GetGameResults(SearchGame,select_year);
+      $( '#GameFullPage' ).dialog( 'open' );
     });
 });
 
