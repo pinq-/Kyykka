@@ -3,7 +3,7 @@ var glob_GameAwayTrows;
 $( document ).ready(function() {
   $( "#GameFullPage" ).dialog({
     autoOpen: false,
-    width: 900,
+    width: 1100,
     height: 700,
     show:{effect: "slide",duration: 200},
     hide:{effect: "slide",duration: 200}
@@ -261,10 +261,10 @@ function FillResults(GameResults,LeftPoints){
     }else{
       Colors =['tasapeli', 'tasapeli'];
     }
-    $(".Home" + tables[i]+ " div:eq(4)").html("");
-    $(".Away" + tables[i]+ " div:eq(4)").html("");
-    $(".Home" + tables[i]+ " div:eq(4)").html("<div class='"+Colors[0]+" GamePoints'>"+home+"</div><div class='GameRealPoints' title ='Kentälle jääneet max pisteet'>"+LeftPoints[i]*2+"</div>");
-    $(".Away" + tables[i]+ " div:eq(4)").html("<div class='"+Colors[1]+" GamePoints'>"+away+"</div><div class='GameRealPoints' title ='Kentälle jääneet max pisteet'>"+LeftPoints[i+2]*2+"</div>");
+    $(".Home" + tables[i]+ " div:eq(9)").html("");
+    $(".Away" + tables[i]+ " div:eq(9)").html("");
+    $(".Home" + tables[i]+ " div:eq(9)").html("<div class='"+Colors[0]+" GamePoints'>"+home+"</div><div class='GameRealPoints' title ='Kentälle jääneet max pisteet'>"+LeftPoints[i]*2+"</div>");
+    $(".Away" + tables[i]+ " div:eq(9)").html("<div class='"+Colors[1]+" GamePoints'>"+away+"</div><div class='GameRealPoints' title ='Kentälle jääneet max pisteet'>"+LeftPoints[i+2]*2+"</div>");
 
   }
 

@@ -110,5 +110,6 @@ canvas{
 .TeamMore{
   float:center;
   font-family: Arial;
+  color : blue;
   text-align: center;
 }
