@@ -261,6 +261,8 @@ function FillResults(GameResults,LeftPoints){
     }else{
       Colors =['tasapeli', 'tasapeli'];
     }
+    $(".Home" + tables[i]+ " div:last").html("");
+    $(".Away" + tables[i]+ " div:last").html("");
     $(".Home" + tables[i]+ " div:last").html("<div class='"+Colors[0]+" GamePoints'>"+home+"</div><div class='GameRealPoints' title ='Kentälle jääneet max pisteet'>"+LeftPoints[i]*2+"</div>");
     $(".Away" + tables[i]+ " div:last").html("<div class='"+Colors[1]+" GamePoints'>"+away+"</div><div class='GameRealPoints' title ='Kentälle jääneet max pisteet'>"+LeftPoints[i+2]*2+"</div>");
 
@@ -274,7 +276,7 @@ function GameMakePie(Trows,Home,Away){
     glob_GameHomeTrows.destroy();
   }
   if (glob_GameAwayTrows != null){
-    glob_GameAwatTrows.destroy();
+    glob_GameAwayTrows.destroy();
   }
   // glob_pisteet = pisteet[2];
   var bgColors = [
@@ -301,8 +303,8 @@ function GameMakePie(Trows,Home,Away){
 
   // console.log(paikat);
 
-  var ctx = document.getElementById("GameHomeTrows").getContext('2d');
-  glob_GameHomeTrows = new Chart(ctx, {
+  var ctxHome = document.getElementById("GameHomeTrows").getContext('2d');
+  glob_GameHomeTrows = new Chart(ctxHome, {
       type: 'pie',
       data: {
           labels: Trow_Names,
@@ -325,8 +327,8 @@ function GameMakePie(Trows,Home,Away){
          }
       }
   });
-  var ctx = document.getElementById("GameAwayTrows").getContext('2d');
-  glob_GameAwayTrows = new Chart(ctx, {
+  var ctxAway = document.getElementById("GameAwayTrows").getContext('2d');
+  glob_GameAwayTrows = new Chart(ctxAway, {
       type: 'pie',
       data: {
           labels: Trow_Names,

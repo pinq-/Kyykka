@@ -290,7 +290,7 @@ function fill_table(TeamPlayers,TeamGames,TeamName,TeamHistoy){
 }
 
 function make_gamelist(games,AmountGames){
-  console.log(games,AmountGames);
+  // console.log(games,AmountGames);
   var options = ["havio","tasapeli","voitto"];
   var jarjestys = [];
   $("#game_results").html('');
