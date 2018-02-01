@@ -107,3 +107,8 @@ canvas{
 #Team_PlayerList tbody{
   font-family: Arial;
 }
+.TeamMore{
+  float:center;
+  font-family: Arial;
+  text-align: center;
+}

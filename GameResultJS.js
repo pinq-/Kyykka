@@ -1,8 +1,7 @@
 var glob_GameHomeTrows;
 var glob_GameAwayTrows;
 $( document ).ready(function() {
-  // GetGameResults(1066,2017);
-  GetGameResults(1142,2018);
+  // GetGameResults(1142,2018);
 });
 function GetGameResults(GameID,select_year){
   var max_amount;

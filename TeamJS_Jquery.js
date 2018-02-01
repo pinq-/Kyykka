@@ -40,12 +40,6 @@ $( document ).ready(function() {
 $( ".Team" ).click(function() {
   $( "#dialog" ).dialog( "open" );
 });
-  // $( ".Team" ).click(function() {
-  //   haku_nimi = prompt("Hae joukkue", $("#Nimi").text());
-  //   if (haku_nimi != "" && haku_nimi != "not found" && haku_nimi != "Hae joukkue"){
-  //     get_team(haku_nimi);
-  //   }
-  // });
   $("#Years").change(function(){
     $("#Years option:selected").each(function(){
       select_year = $(this).text();
@@ -66,6 +60,11 @@ $( ".Team" ).click(function() {
       var name = $(this).closest('tr').children('td:first').text().replace(/#+|[0-9]/g,'').trim();
       hae_tiedot(name);
       $( '#TeamPlayer' ).dialog( 'open' );
+    });
+
+  $('#game_results').on( 'click', 'div .TeamMore', function () {
+      var SearchGame = $(this).attr('href');
+      GetGameResults(SearchGame,select_year);
     });
 });
 
@@ -290,6 +289,7 @@ function fill_table(TeamPlayers,TeamGames,TeamName,TeamHistoy){
 }
 
 function make_gamelist(games,AmountGames){
+  console.log(games,AmountGames);
   var options = ["havio","tasapeli","voitto"];
   var jarjestys = [];
   $("#game_results").html('');
@@ -330,7 +330,7 @@ function make_gamelist(games,AmountGames){
       }
       $("#game_results").append('<div id="main"><div class="'+jarjestys[0]+'">'+val.home.name+'</div><div class="center">'+home+'</div><div class="center">'+away+'</div><div class='+jarjestys[1]+'>'+val.away.name+'</div></div>');
       $("#game_results").append('<div class="erat"><div class="era"><div class="leveys">Erä 1.</div><div class="'+jarjestys[3]+' center">'+val.home.results.first+'</div><div class="'+jarjestys[4]+' center">'+val.away.results.first+'</div></div>'
-                                +'<div class="era"><div class="leveys">Erä 2.</div><div class="'+jarjestys[5]+' center">'+val.home.results.second+'</div><div class="'+jarjestys[6]+' center">'+val.away.results.second+'</div></div></div>');
+                                +'<div class="era"><div class="leveys">Erä 2.</div><div class="'+jarjestys[5]+' center">'+val.home.results.second+'</div><div class="'+jarjestys[6]+' center">'+val.away.results.second+'</div></div><div class = "TeamMore" href ="'+val.id+'" >Lisää</div></div>');
     });
 }
 
