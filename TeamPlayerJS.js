@@ -70,7 +70,7 @@ function UpdatePlayerinfo(Pname,Pnumber,PlayerPoints,PPointsDis){
       "info": false,
       "bSort" : false
     });
-    $(".PlayerInfo div:eq(1)").html("<b>Pelaaja tiedot</b>");
+    $(".PlayerInfo div:eq(1)").html("<b>Pelaajatiedot</b>");
     $(".PlayerInfo div:eq(1)").css({"padding": "0px", "font-size":"1em","min-width": "542px"});
     $(".PlayerInfo div:last").css("min-width", "530px");
   }

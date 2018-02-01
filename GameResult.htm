@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Game</title>
+    <link href="TeamTyyli.css" type="text/css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/hot-sneaks/jquery-ui.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.jqueryui.min.css">
+    <script src="TeamPlayerJS.js"></script>
+    <script src="TeamJS_Jquery.js"></script>
+    <script src="GameResultJS.js"></script>
+    <link href="TeamPlayer.css" type="text/css" rel="stylesheet">
+    <link href="GameStyle.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+<div id="GameTeams" class="center">
+  <div class="Team ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle">
+    <div id ="GameDate"></div>
+    <div class = "HomeResultAvrg">
+      <div id="HomeResult" class = "GameResultLine"></div>
+      <div id="HomeAvrage" title = "Pelien keskiarvo"></div>
+    </div>
+    <div><b id="Teams" class = "Nimi">Pelit</b></div>
+    <div class = "AwayResultAvrg">
+      <div id="AwayResult" class = "GameResultLine"></div>
+      <div id="AwayAvrage" title = "Pelien keskiarvo"></div>
+    </div>
+  </div>
+</div>
+<div id="GamePreGames">
+  <div><b>Edelliset tulokset</b></div>
+</div>
+<div class = "GameFullPage">
+<div class ="GameInfo">
+  <table id= "GameInfo" class = "display compact">
+    <thead>
+      <tr>
+        <th title = "eräkeskiarvo">EK</th>
+        <th title = "heittokeskiarvo">HK</th>
+        <th title = "Paras heitto">PH</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td id="GameAvrageRound"></td>
+        <td id="GameAvrageTrow"></td>
+        <td id="GameBestTrowa"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="FirstRound"><h2> Ensimmäinen erä </h2></div>
+<div class = "HomeFirst">
+  <table id= "HomeFirst" class = "compact row-border">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th title = "Ensimmäinen heitto">1.</th>
+        <th title = "Toinen heitto">2.</th>
+        <th title = "Kolmas heitto">3.</th>
+        <th title = "Neljäs heitto">4.</th>
+        <th title = "Kyykät yhteensä">yht.</th>
+        <th title = "Heittokeskiarvo">HK</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<div class = "AwayFirst">
+  <table id= "AwayFirst" class = "compact row-border">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th title = "Ensimmäinen heitto">1.</th>
+        <th title = "Toinen heitto">2.</th>
+        <th title = "Kolmas heitto">3.</th>
+        <th title = "Neljäs heitto">4.</th>
+        <th title = "Kyykät yhteensä">yht.</th>
+        <th title = "Heittokeskiarvo">HK</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+<div class="FirstRound"><h2> Toinen erä </h2></div>
+<div class = "HomeSecond">
+  <table id= "HomeSecond" class = "compact row-border">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th title = "Ensimmäinen heitto">1.</th>
+        <th title = "Toinen heitto">2.</th>
+        <th title = "Kolmas heitto">3.</th>
+        <th title = "Neljäs heitto">4.</th>
+        <th title = "Kyykät yhteensä">yht.</th>
+        <th title = "Heittokeskiarvo">HK</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<div class = "AwaySecond">
+  <table id= "AwaySecond" class = "compact row-border">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th title = "Ensimmäinen heitto">1.</th>
+        <th title = "Toinen heitto">2.</th>
+        <th title = "Kolmas heitto">3.</th>
+        <th title = "Neljäs heitto">4.</th>
+        <th title = "Kyykät yhteensä">yht.</th>
+        <th title = "Heittokeskiarvo">HK</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+<div class = "GamePies">
+  <div class ="HomeFirst" >
+      <canvas  id="GameHomeTrows" height="150"></canvas>
+  </div>
+  <div class ="AwayFirst">
+      <canvas  id="GameAwayTrows" height="150"></canvas>
+  </div>
+</div>
+</div>
+</body></html>

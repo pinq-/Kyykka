@@ -1,0 +1,90 @@
+canvas{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+#GamePreGames {
+  float:center;
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+  font-family: Arial;
+}
+#GamePreGames div{
+  border-radius: 2px;
+}
+.GameDate {
+  float:left;
+  width: 13% !important;
+}
+.GameInfo  {
+  text-align: center;
+}
+.GameResultLine {
+  /* float:left; */
+  color : black;
+  border-radius: 10px;
+  /* vertical-align: top; */
+}
+
+.HomeResultAvrg, .AwayResultAvrg{
+  float:left;
+  width: 20%;
+
+}
+
+#GameTeams .Nimi{
+  float:left;
+  width: 60%;
+
+}
+.GameMain div:nth-child(2),
+.GameMain div:last-child{
+  /* display: inline; */
+  white-space: nowrap;
+  width: 30% !important;
+}
+.HomeFirst, .AwayFirst, .HomeSecond, .AwaySecond {
+  text-align: center;
+  width: 49%;
+  float:left;
+  padding: 0px;
+  margin: 0 4px;
+  font-family: Arial;
+}
+table {
+  width: 100% !important;
+}
+
+.FirstRound{
+  text-align: center;
+  width: 100%;
+}
+.GameFullPage{
+  display: none;
+}
+.GamePoints{
+  width: 10%;
+  float:right;
+  color : black;
+  border-radius: 10px;
+  font-weight: bold;
+}
+.GameRealPoints{
+  width: 10%;
+  float:right;
+  color : black;
+  border-radius: 10px;
+  background-color: #c5c5c5;
+}
+#GamePreGames{
+  display: none;
+}
+h2 {
+  font-family: Arial;
+
+}
+.GamePies {
+  width: 100%;
+  float:left;
+}

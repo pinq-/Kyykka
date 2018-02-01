@@ -47,6 +47,8 @@ canvas{
 }
 #main div:first-child,
 #main div:last-child{
+  /* display: inline; */
+  white-space: nowrap;
   width: 40%;
 }
 
