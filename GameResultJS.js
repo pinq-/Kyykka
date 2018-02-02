@@ -49,14 +49,14 @@ function GameFillTables(TheGame){
   $("#AwayAvrage").text("("+Math.round(10*TheGame.away.average)/10+")");
   $("#GameDate").text(TheGame.date.replace(/-/g, ".").substr(0,16));
   if (home > away ){
-    $("#HomeResult").attr('class', "havio");
-    $("#AwayResult").attr('class', "voitto");
+    $("#HomeResult").attr('class', "GameResultLine, havio");
+    $("#AwayResult").attr('class', "GameResultLine, voitto");
   }else if (home < away) {
-    $("#HomeResult").attr('class', "voitto");
-    $("#AwayResult").attr('class', "havio");
+    $("#HomeResult").attr('class', "GameResultLine, voitto");
+    $("#AwayResult").attr('class', "GameResultLine, havio");
   }else{
-    $("#HomeResult").attr('class', "tasapeli");
-    $("#AwayResult").attr('class', "tasapeli");
+    $("#HomeResult").attr('class', "GameResultLine, tasapeli");
+    $("#AwayResult").attr('class', "GameResultLine, tasapeli");
   }
 }
 
@@ -261,10 +261,10 @@ function FillResults(GameResults,LeftPoints){
     }else{
       Colors =['tasapeli', 'tasapeli'];
     }
-    $(".Home" + tables[i]+ " div:eq(4)").html("");
-    $(".Away" + tables[i]+ " div:eq(4)").html("");
-    $(".Home" + tables[i]+ " div:eq(4)").html("<div class='"+Colors[0]+" GamePoints'>"+home+"</div><div class='GameRealPoints' title ='Kentälle jääneet max pisteet'>"+LeftPoints[i]*2+"</div>");
-    $(".Away" + tables[i]+ " div:eq(4)").html("<div class='"+Colors[1]+" GamePoints'>"+away+"</div><div class='GameRealPoints' title ='Kentälle jääneet max pisteet'>"+LeftPoints[i+2]*2+"</div>");
+    $(".Home" + tables[i]+ " div:eq(9)").html("");
+    $(".Away" + tables[i]+ " div:eq(9)").html("");
+    $(".Home" + tables[i]+ " div:eq(9)").html("<div class='"+Colors[0]+" GamePoints'>"+home+"</div><div class='GameRealPoints' title ='Kentälle jääneet max pisteet'>"+LeftPoints[i]*2+"</div>");
+    $(".Away" + tables[i]+ " div:eq(9)").html("<div class='"+Colors[1]+" GamePoints'>"+away+"</div><div class='GameRealPoints' title ='Kentälle jääneet max pisteet'>"+LeftPoints[i+2]*2+"</div>");
 
   }
 
