@@ -49,19 +49,19 @@ function GameFillTables(TheGame){
   $("#AwayAvrage").text("("+Math.round(10*TheGame.away.average)/10+")");
   $("#GameDate").text(TheGame.date.replace(/-/g, ".").substr(0,16));
   if (home > away ){
-    $("#HomeResult").addClass("havio");
-    $("#AwayResult").addClass("voitto");
+    $("#HomeResult").attr('class', "GameResultLine havio");
+    $("#AwayResult").attr('class', "GameResultLine voitto");
   }else if (home < away) {
-    $("#HomeResult").addClass("voitto");
-    $("#AwayResult").addClass("havio");
+    $("#HomeResult").attr('class', "GameResultLine voitto");
+    $("#AwayResult").attr('class', "GameResultLine havio");
   }else{
-    $("#HomeResult").addClass("tasapeli");
-    $("#AwayResult").addClass("tasapeli");
+    $("#HomeResult").attr('class', "GameResultLine tasapeli");
+    $("#AwayResult").attr('class', "GameResultLine tasapeli");
   }
 }
 
 function GameMakeGamelist(games){
-
+    $("#GamePreGames").html("");
   if (games.length != 0){
     var options = ["havio","tasapeli","voitto"];
     var jarjestys = [];
