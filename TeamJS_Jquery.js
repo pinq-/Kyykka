@@ -72,7 +72,7 @@ $( ".Team" ).click(function() {
 function get_team(name){
   // console.log("haku",name);
   // console.log(haku_nimi,select_year)
-  $.getJSON("http://pinq.kapsi.fi/github/workspace/index.php", {cmd : "team",name: haku_nimi.replace(/'/g, "&apos;"), year : select_year},function(data){
+  $.getJSON("http://pinq.kapsi.fi/github/workspace/index.php", {cmd : "team",name: haku_nimi, year : select_year},function(data){
     if (data.pelit.team != "not found"){
       var TeamGames = count_wins(data.pelit.games,data.pelit.team);
       var PalyersData = count_drows(data.pelaajat);
@@ -238,7 +238,7 @@ function make_barchart(TeamGames){
                       mode: 'index',
                       callbacks: {
                         title: function(tooltipItem) {
-                              return chek_name(TeamGames[4][tooltipItem[0].index]);
+                              return TeamGames[4][tooltipItem[0].index];
                             }
                       }
                   },
@@ -256,7 +256,7 @@ function fill_table(TeamPlayers,TeamGames,TeamName,TeamHistoy){
 
     var TeamErat = Array.prototype.concat.apply(TeamGames[0],TeamGames[1]);
 
-    $("#Nimi").text(chek_name(TeamName));
+    $("#Nimi").text(TeamName);
     $("#peli_maarat").text(TeamGames[3].length);
 
     $("#paras_peli").text(TeamGames[3].min());

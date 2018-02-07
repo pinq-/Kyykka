@@ -289,7 +289,7 @@ function PlayerCountPoints(TrowList,max_amount){
     $.each(TrowList, function(index) {
         heittoja ++;
         if(index%4 == 0){
-          PlayerGamelist.push(chek_name(TrowList[index].vieras_joukkue));
+          PlayerGamelist.push(TrowList[index].vieras_joukkue);
         }
         if(TrowList[index].jaljella == max_amount*2){
             // console.log(TrowList[index].kyykat);
@@ -393,9 +393,6 @@ function pisteiden_taulukointi(lista,piste_lista){
       }
     });
     return     [aloitus, toka, kolmas, neljas, label ,eraScore, nollat[1], paikat];
-}
-function chek_name(name){
-  return name.replace(/&apos;/g, "'")
 }
 
 function add(a, b) {
