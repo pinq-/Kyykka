@@ -67,6 +67,11 @@ $( ".Team" ).click(function() {
       GetGameResults(SearchGame,select_year);
       $( '#GameFullPage' ).dialog( 'open' );
     });
+  $('#game_results').on( 'click', 'div .NoResult', function () {
+      var SearchGame = $(this).attr('href');
+      GetGameResults(SearchGame,select_year);
+      $( '#GameFullPage' ).dialog( 'open' );
+    });
 });
 
 function get_team(name){
@@ -91,6 +96,7 @@ function count_wins(TeamGames,TeamName){
   var loses = [];
   var even = [];
   $.each(TeamGames,function(i,val){
+    if(val.home.results.first != null){
       var home = Number(val.home.results.first) + Number(val.home.results.second);
       var away = Number(val.away.results.first) + Number(val.away.results.second);
 
@@ -126,6 +132,8 @@ function count_wins(TeamGames,TeamName){
         games[3].push(Number(val.away.results.first) + Number(val.away.results.second));
         games[4].push(val.home.name);
       }
+
+    }
   });
   make_barchart(games);
   return games;
@@ -299,39 +307,43 @@ function make_gamelist(games,AmountGames){
       var home = Number(val.home.results.first) + Number(val.home.results.second);
       var away = Number(val.away.results.first) + Number(val.away.results.second);
 
-      if (home > away){
-        jarjestys = [options[0],options[2]];
-      }
-      else if(home < away){
-        jarjestys = [options[2],options[0]];
-      }
-      else{
-        jarjestys = [options[1],options[1]];
-      }
-      if (Number(val.home.results.first) > Number(val.away.results.first)){
-        jarjestys[3] = options[0];
-        jarjestys[4] = options[2];
-      }else if (Number(val.home.results.first) < Number(val.away.results.first)){
-        jarjestys[3] = options[2];
-        jarjestys[4] = options[0];
+      if(val.home.results.first == null){
+        $("#game_results").append('<div id="main"><div class="NoResult" href ="'+val.id+'">'+val.home.name+'</div><div class="center"> - </div><div class="center"> - </div><div class="NoResult" href ="'+val.id+'">'+val.away.name+'</div></div>');
       }else{
-        jarjestys[3] = options[1];
-        jarjestys[4] = options[1];
-      }
+        if (home > away){
+          jarjestys = [options[0],options[2]];
+        }
+        else if(home < away){
+          jarjestys = [options[2],options[0]];
+        }
+        else{
+          jarjestys = [options[1],options[1]];
+        }
+        if (Number(val.home.results.first) > Number(val.away.results.first)){
+          jarjestys[3] = options[0];
+          jarjestys[4] = options[2];
+        }else if (Number(val.home.results.first) < Number(val.away.results.first)){
+          jarjestys[3] = options[2];
+          jarjestys[4] = options[0];
+        }else{
+          jarjestys[3] = options[1];
+          jarjestys[4] = options[1];
+        }
 
-      if (Number(val.home.results.second) > Number(val.away.results.second)){
-        jarjestys[5] = options[0];
-        jarjestys[6] = options[2];
-      }else if (Number(val.home.results.second) < Number(val.away.results.second)){
-        jarjestys[5] = options[2];
-        jarjestys[6] = options[0];
-      }else{
-        jarjestys[5] = options[1];
-        jarjestys[6] = options[1];
+        if (Number(val.home.results.second) > Number(val.away.results.second)){
+          jarjestys[5] = options[0];
+          jarjestys[6] = options[2];
+        }else if (Number(val.home.results.second) < Number(val.away.results.second)){
+          jarjestys[5] = options[2];
+          jarjestys[6] = options[0];
+        }else{
+          jarjestys[5] = options[1];
+          jarjestys[6] = options[1];
+        }
+        $("#game_results").append('<div id="main"><div class="'+jarjestys[0]+'">'+val.home.name+'</div><div class="center">'+home+'</div><div class="center">'+away+'</div><div class='+jarjestys[1]+'>'+val.away.name+'</div></div>');
+        $("#game_results").append('<div class="erat"><div class="era"><div class="leveys">Erä 1.</div><div class="'+jarjestys[3]+' center">'+val.home.results.first+'</div><div class="'+jarjestys[4]+' center">'+val.away.results.first+'</div></div>'
+        +'<div class="era"><div class="leveys">Erä 2.</div><div class="'+jarjestys[5]+' center">'+val.home.results.second+'</div><div class="'+jarjestys[6]+' center">'+val.away.results.second+'</div></div><div class = "TeamMore" href ="'+val.id+'" >Lisää</div></div>');
       }
-      $("#game_results").append('<div id="main"><div class="'+jarjestys[0]+'">'+val.home.name+'</div><div class="center">'+home+'</div><div class="center">'+away+'</div><div class='+jarjestys[1]+'>'+val.away.name+'</div></div>');
-      $("#game_results").append('<div class="erat"><div class="era"><div class="leveys">Erä 1.</div><div class="'+jarjestys[3]+' center">'+val.home.results.first+'</div><div class="'+jarjestys[4]+' center">'+val.away.results.first+'</div></div>'
-                                +'<div class="era"><div class="leveys">Erä 2.</div><div class="'+jarjestys[5]+' center">'+val.home.results.second+'</div><div class="'+jarjestys[6]+' center">'+val.away.results.second+'</div></div><div class = "TeamMore" href ="'+val.id+'" >Lisää</div></div>');
     });
 }
 
