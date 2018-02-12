@@ -392,14 +392,23 @@ function Team_MakePlayerList(PlayerList){
 
 function Team_CountPlayerValues(List){
   // console.log(List);
-  var PlayerResults = [[],[],[],[],[],0];
+  var PlayerResults = [[0,0,0],[],[],[],[],0];
+  var TrowAmount = 0;
   $.each(List, function(i,val){
-    PlayerResults[0] = i+1;
-    if(val.kyykat != 'h'){
-      PlayerResults[1].push(Number(val.kyykat));
-      // console.log(val);
+    if(val.kyykat != '?'){
+      TrowAmount ++;
+      PlayerResults[2].push(Number(val.heitto_paikka));
     }
-    PlayerResults[2].push(Number(val.heitto_paikka));
+    if(PlayerResults[0][1] != val.ottelu_numero || PlayerResults[0][2] != val.era){
+      PlayerResults[0][0] ++;
+      PlayerResults[0][1] = val.ottelu_numero;
+      PlayerResults[0][2] = val.era;
+    }
+    // console.log(isNaN(val.kyykat),val.kyykat);
+    if(isNaN(val.kyykat) == false){
+      PlayerResults[1].push(Number(val.kyykat));
+      // console.log(val.kyykat);
+    }
     if(val.kyykat == 'h' || val.kyykat == '0'){
       PlayerResults[3].push(Number(val.kyykat));
       // console.log(val.kyykat);
@@ -408,11 +417,12 @@ function Team_CountPlayerValues(List){
       PlayerResults[5] = Number(val.kyykat);
     }
   });
+  // console.log(TrowAmount,PlayerResults[0][0]);
   PlayerResults[4] =PlayerResults[1].reduce(add, 0)*2;
-  PlayerResults[1] =Math.round(100*(PlayerResults[1].reduce(add, 0)/PlayerResults[0]))/100;
-  PlayerResults[2] =Math.round(100*(PlayerResults[2].reduce(add, 0)/PlayerResults[0]))/100;
-  PlayerResults[3] =Math.round(1000*(PlayerResults[3].length/PlayerResults[0]))/10;
-  PlayerResults[0] = PlayerResults[0]/4;
+  PlayerResults[1] =Math.round(100*(PlayerResults[1].reduce(add, 0)/TrowAmount))/100;
+  PlayerResults[2] =Math.round(100*(PlayerResults[2].reduce(add, 0)/TrowAmount))/100;
+  PlayerResults[3] =Math.round(1000*(PlayerResults[3].length/TrowAmount))/10;
+  PlayerResults[0] = PlayerResults[0][0];
   // console.log(PlayerResults);
 
   return PlayerResults;
