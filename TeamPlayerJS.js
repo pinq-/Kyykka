@@ -43,8 +43,7 @@ function hae_tiedot(nimi){
 
 function UpdatePlayerinfo(Pname,Pnumber,PlayerPoints,PPointsDis){
 
-  $("#PlayerName").text(Pname);
-  $("#Numero").text("#"+Pnumber);
+  $("#PlayerName").text(Pname + " #" +Pnumber);
 
   $("#era_maara").text(PPointsDis[4].length);
   $("#max_era").text(Math.max.apply(null,PPointsDis[5]));
@@ -348,6 +347,7 @@ function heittojen_maara(lista){
 }
 
 function pisteiden_taulukointi(lista,piste_lista){
+  // console.log(lista,piste_lista);
     var aloitukset = [1,3,5,7,9,11,13,15];
     var aloitus =[];
     var toka = [];
@@ -357,33 +357,72 @@ function pisteiden_taulukointi(lista,piste_lista){
     var eraScore = [];
     var paikat = [[],[],[],[]];
     var nollat = [0,0];
-    $.each(piste_lista, function(i,val){
-      if( val == 0){
-        nollat[0] += 1;
-        if (nollat[0] > nollat[1]){
-          nollat[1] = nollat[0];
-        }
-      }else{
-        nollat[0] = 0;
+
+  var Game = [0,0,0];
+  var EraPoints = 0;
+  var positon = 0;
+  var order = 0;
+  var Trows = [[],[],[],[]];
+  $.each(piste_lista, function(i,val){
+    if( val == 0){
+      nollat[0] += 1;
+      if (nollat[0] > nollat[1]){
+        nollat[1] = nollat[0];
       }
-    });
+    }else{
+      nollat[0] = 0;
+    }
+  });
     // console.log(lista.length/4)
-    for(var i = 0, len = lista.length; i < len; i ++){
+  $.each(lista, function(i,val){
+    if(Game[1] != val.ottelu_numero || Game[2] != val.era){
+      if(Game[0] != 0){
+        eraScore.push(EraPoints);
+        EraPoints = 0;
+
+      }
+      order = 0;
+      label.push(val.heitto_paikka);
+      Game[0] ++;
+      Game[1] = val.ottelu_numero;
+      Game[2] = val.era;
+    }
+    if(val.kyykat == 'h'){
+      paikat[Number(val.heitto_paikka)-1].push(0);
+      Trows[order].push(0);
+
+    }else if(val.kyykat != '?'){
+      paikat[Number(val.heitto_paikka)-1].push(Number(val.kyykat));
+      Trows[order].push(Number(val.kyykat));
+    }else{
+      Trows[order].push(0);
+    }
+    if(isNaN(val.kyykat) == false){
+      EraPoints += Number(val.kyykat);
+      // console.log(val.kyykat);
+    }
+    // console.log(i,val)
+    positon = val.heitto_paikka;
+    order ++;
+  });
+  eraScore.push(EraPoints);
+  // console.log(paikat);
+    // for(var i = 0, len = lista.length; i < len; i ++){
 
       // console.log("pituus",toka,typeof(lista[i].heitto_jarjestys),piste_lista[i],i)
-      if($.inArray(Number(lista[i].heitto_jarjestys),aloitukset) > -1){
-          // console.log(lista[i].heitto_jarjestys,"sisällä")
-          aloitus.push(piste_lista[i]/2);
-          toka.push(piste_lista[i+1]/2);
-          kolmas.push(piste_lista[i+2]/2);
-          neljas.push(piste_lista[i+3]/2);
-          label.push(lista[i].heitto_paikka);
-          paikat[Number(lista[i].heitto_paikka)-1].push(piste_lista[i]/2,piste_lista[i+1]/2,piste_lista[i+2]/2,piste_lista[i+3]/2);
-          keskiar = (piste_lista[i]+piste_lista[i+1]+piste_lista[i+2]+piste_lista[i+3])/2;
-          eraScore.push(keskiar);
-          i += 3;
-      }
-	  }
+      // if($.inArray(Number(lista[i].heitto_jarjestys),aloitukset) > -1){
+      //     // console.log(lista[i].heitto_jarjestys,"sisällä")
+      //     aloitus.push(piste_lista[i]/2);
+      //     toka.push(piste_lista[i+1]/2);
+      //     kolmas.push(piste_lista[i+2]/2);
+      //     neljas.push(piste_lista[i+3]/2);
+          // label.push(lista[i].heitto_paikka);
+          // paikat[Number(lista[i].heitto_paikka)-1].push(piste_lista[i]/2,piste_lista[i+1]/2,piste_lista[i+2]/2,piste_lista[i+3]/2);
+          // keskiar = (piste_lista[i]+piste_lista[i+1]+piste_lista[i+2]+piste_lista[i+3])/2;
+          // eraScore.push(keskiar);
+          // i += 3;
+      // }
+	  // }
     // console.log([aloitus, toka, kolmas, neljas, label ,keskiarvo ]);
     $.each(paikat,function(i,val){
       if(val.length != 0){
@@ -392,7 +431,9 @@ function pisteiden_taulukointi(lista,piste_lista){
         paikat[i] = ["-",0];
       }
     });
-    return     [aloitus, toka, kolmas, neljas, label ,eraScore, nollat[1], paikat];
+    // console.log(Game[0], label, eraScore, paikat);
+    return     [Trows[0], Trows[1], Trows[2], Trows[3], label ,eraScore, nollat[1], paikat, Game[0]];
+    // return     [game[0], label,eraScore ];
 }
 
 function add(a, b) {
