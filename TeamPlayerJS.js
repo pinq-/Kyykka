@@ -1,4 +1,4 @@
-//functions from other file
+//Previes Teams
 var glob_aloitusheitot;
 var glob_heitotyli;
 var glob_heitotali;
@@ -46,9 +46,9 @@ function UpdatePlayerinfo(Pname,Pnumber,PlayerPoints,PPointsDis){
   $("#PlayerName").text(Pname + " #" +Pnumber);
 
   $("#era_maara").text(PPointsDis[4].length);
-  $("#max_era").text(Math.max.apply(null,PPointsDis[5]));
-  $("#min_era").text(Math.min.apply(null,PPointsDis[5]));
-  $("#average_era").text(Math.round(100*(PPointsDis[5].reduce(add,0)/PPointsDis[5].length))/100);
+  $("#max_era").text(Math.max.apply(null,PPointsDis[5][0]));
+  $("#min_era").text(Math.min.apply(null,PPointsDis[5][0]));
+  $("#average_era").text(Math.round(100*(PPointsDis[5][0].reduce(add,0)/PPointsDis[5][0].length))/100);
   $("#heitot_maara").text(PlayerPoints[0].length);
   $("#pisteet_maara").text(PlayerPoints[4][2]);
   $("#pisteetper_maara").text(PlayerPoints[4][3]);
@@ -196,24 +196,23 @@ function Update_pies(PlayerPoints,Trow_Names,max_amount){
   }
 }
 function Update_barchar(AvrageHeitto,PlayerPointsDis,Gamelist){
-
+  // console.log(AvrageHeitto,PlayerPointsDis,Gamelist);
   if (PlayerGlobalTrows != null){
     PlayerGlobalTrows.destroy();
   }
-
+  $.each(PlayerPointsDis[4], function(i,val){
+    PlayerPointsDis[4][i] = PlayerPointsDis[5][0][i]+ " (" + PlayerPointsDis[4][i] + ")";
+  });
   var ctx4 = document.getElementById("PlayerPoints").getContext('2d');
   AvrageHeitto = Array.apply(null, Array(PlayerPointsDis[0].length)).map(Number.prototype.valueOf,AvrageHeitto);
   var AvrageList = [];
-  $.each(PlayerPointsDis[5],function(i,val){
-    PlayerPointsDis[5][i] = val/4;
-  });
   PlayerGlobalTrows= new Chart(ctx4, {
       type: 'bar',
       data: {
           labels: PlayerPointsDis[4],
           datasets: [{
             type: 'line',
-            label: 'keskiarvo',
+            label: 'Pelaajan keskiarvo',
             borderColor: 'rgb(50, 50, 0)',
             borderWidth: 1,
             fill: false,
@@ -225,7 +224,7 @@ function Update_barchar(AvrageHeitto,PlayerPointsDis,Gamelist){
             borderColor: 'rgb(255, 51, 51)',
             borderWidth: 4,
             fill: false,
-            data: PlayerPointsDis[5]
+            data: PlayerPointsDis[5][1]
           },{
               type: 'bar',
               label: 'Ensimmäinen',
@@ -264,7 +263,11 @@ function Update_barchar(AvrageHeitto,PlayerPointsDis,Gamelist){
                         title: function(tooltipItem) {
                               return Gamelist[tooltipItem[0].index];
                             }
-                      }
+                      },
+                      filter: function(item, data) {
+                       var data = data.datasets[item.datasetIndex].data[item.index];
+                       return !isNaN(data) && data !== null;
+                     }
                   },
                   responsive: true,
                   scales: {
@@ -278,43 +281,50 @@ function Update_barchar(AvrageHeitto,PlayerPointsDis,Gamelist){
 
 
 function PlayerCountPoints(TrowList,max_amount){
+  // console.log(TrowList,max_amount);
     var alle = [];
     var yli = [];
     var aloitus = [];
     var points = [];
+    var Game = [0,0,0];
     tieto = [0,0,0,0,0]; //1.hauuet% ;2. joulukuuset;3.points yht ;4. pistettä/heitto
     var PlayerGamelist = [];
     var heittoja = 0;
-    $.each(TrowList, function(index) {
-        heittoja ++;
-        if(index%4 == 0){
-          PlayerGamelist.push(TrowList[index].vieras_joukkue);
-        }
-        if(TrowList[index].jaljella == max_amount*2){
-            // console.log(TrowList[index].kyykat);
-            aloitus.push(TrowList[index].kyykat);
-        }
-        if(TrowList[index].jaljella >= max_amount){
-            yli.push(TrowList[index].kyykat);
-        }
-        else if(TrowList[index].jaljella < max_amount){
-            alle.push(TrowList[index].kyykat);
-        }
-        if(TrowList[index].kyykat === 'h'){
-            points.push(0);
-            tieto[0] ++;
-        }
-        else{
-            points.push(TrowList[index].kyykat*2);
-            if (Number(TrowList[index].kyykat) == 6){
-                tieto[1] ++;
-            }
-            tieto[2] += Number(TrowList[index].kyykat)*2;
-            // tieto[3] += Number(TrowList[index].kyykat);
-        }
-        if(TrowList[index].kyykat === 'h' || Number(TrowList[index].kyykat) == 0){
-          tieto[4] ++;
-        }
+    $.each(TrowList, function(index,val) {
+        if(val.kyykat != '?'){
+          heittoja ++;
+          if(Game[1] != val.ottelu_numero || Game[2] != val.era){
+            PlayerGamelist.push(val.vieras_joukkue);
+            Game[0] ++;
+            Game[1] = val.ottelu_numero;
+            Game[2] = val.era;
+          }
+          if(val.jaljella == max_amount*2){
+              // console.log(val.kyykat);
+              aloitus.push(val.kyykat);
+          }
+          if(val.jaljella >= max_amount){
+              yli.push(val.kyykat);
+          }
+          else if(val.jaljella < max_amount){
+              alle.push(val.kyykat);
+          }
+          if(val.kyykat === 'h'){
+              points.push(0);
+              tieto[0] ++;
+          }
+          else{
+              points.push(val.kyykat*2);
+              if (Number(val.kyykat) == 6){
+                  tieto[1] ++;
+              }
+              tieto[2] += Number(val.kyykat)*2;
+              // tieto[3] += Number(val.kyykat);
+          }
+          if(val.kyykat === 'h' || Number(val.kyykat) == 0){
+            tieto[4] ++;
+          }
+      }
     });
     var count_yli = heittojen_maara(yli);
     var count_alle = heittojen_maara(alle);
@@ -354,7 +364,7 @@ function pisteiden_taulukointi(lista,piste_lista){
     var kolmas = [];
     var neljas = [];
     var label = [];
-    var eraScore = [];
+    var eraScore = [[],[]];
     var paikat = [[],[],[],[]];
     var nollat = [0,0];
 
@@ -377,10 +387,11 @@ function pisteiden_taulukointi(lista,piste_lista){
   $.each(lista, function(i,val){
     if(Game[1] != val.ottelu_numero || Game[2] != val.era){
       if(Game[0] != 0){
-        eraScore.push(EraPoints);
+        eraScore[0].push(EraPoints);
+        eraScore[1].push(EraPoints/order);
         EraPoints = 0;
-
       }
+      // if ()
       order = 0;
       label.push(val.heitto_paikka);
       Game[0] ++;
@@ -395,7 +406,7 @@ function pisteiden_taulukointi(lista,piste_lista){
       paikat[Number(val.heitto_paikka)-1].push(Number(val.kyykat));
       Trows[order].push(Number(val.kyykat));
     }else{
-      Trows[order].push(0);
+      Trows[order].push(null);
     }
     if(isNaN(val.kyykat) == false){
       EraPoints += Number(val.kyykat);
@@ -405,7 +416,7 @@ function pisteiden_taulukointi(lista,piste_lista){
     positon = val.heitto_paikka;
     order ++;
   });
-  eraScore.push(EraPoints);
+  eraScore[0].push(EraPoints);
   // console.log(paikat);
     // for(var i = 0, len = lista.length; i < len; i ++){
 
@@ -432,7 +443,7 @@ function pisteiden_taulukointi(lista,piste_lista){
       }
     });
     // console.log(Game[0], label, eraScore, paikat);
-    return     [Trows[0], Trows[1], Trows[2], Trows[3], label ,eraScore, nollat[1], paikat, Game[0]];
+    return     [Trows[0], Trows[1], Trows[2], Trows[3], label ,eraScore, nollat[1], paikat, Game[0], ];
     // return     [game[0], label,eraScore ];
 }
 
