@@ -25,6 +25,9 @@ function GetGameResults(GameID,select_year){
   .done(function(data){
     if (data.Trows.length == 0){
       $("#Teams").text("Peliä ei löydy");
+      GameFillTablesEmpty(data.Results.game);
+      GameMakeGamelist(data.Results.PreGames);
+      $(".TeamGameResults").hide();
     }
     else{
       GameFillTables(data.Results.game);
@@ -34,6 +37,7 @@ function GetGameResults(GameID,select_year){
       GameFillInfo(Gameresults);
       FillResults(data.Results.game, Gameresults[3]);
       GameMakePie(Gameresults[4],data.Results.game.home.name,data.Results.game.away.name);
+      $(".TeamGameResults").show();
     }
   });
 }
@@ -58,6 +62,17 @@ function GameFillTables(TheGame){
     $("#HomeResult").attr('class', "GameResultLine tasapeli");
     $("#AwayResult").attr('class', "GameResultLine tasapeli");
   }
+}
+function GameFillTablesEmpty(TheGame){
+  // console.log(TheGame);
+  $("#Teams").text(TheGame.home.name+" vs. "+ TheGame.away.name);
+  $("#HomeResult").text(" - ");
+  $("#AwayResult").text(" - ");
+  $("#HomeAvrage").text("("+Math.round(10*TheGame.home.average)/10+")");
+  $("#AwayAvrage").text("("+Math.round(10*TheGame.away.average)/10+")");
+  $("#GameDate").text(TheGame.date.replace(/-/g, ".").substr(0,16));
+  $("#HomeResult").attr('class', "GameResultLine");
+  $("#AwayResult").attr('class', "GameResultLine");
 }
 
 function GameMakeGamelist(games){

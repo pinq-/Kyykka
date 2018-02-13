@@ -85,3 +85,6 @@ h2 {
   width: 100%;
   float:left;
 }
+.TeamGameResults{
+  display: none;
+}

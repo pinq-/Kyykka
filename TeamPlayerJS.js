@@ -52,10 +52,10 @@ function UpdatePlayerinfo(Pname,Pnumber,PlayerPoints,PPointsDis){
   $("#heitot_maara").text(PlayerPoints[0].length);
   $("#pisteet_maara").text(PlayerPoints[4][2]);
   $("#pisteetper_maara").text(PlayerPoints[4][3]);
-  $("#pisteetper_eka").text(PPointsDis[7][0][0]+"["+PPointsDis[7][0][1]+"]");
-  $("#pisteetper_tok").text(PPointsDis[7][1][0]+"["+PPointsDis[7][1][1]+"]");
-  $("#pisteetper_kol").text(PPointsDis[7][2][0]+"["+PPointsDis[7][2][1]+"]");
-  $("#pisteetper_nel").text(PPointsDis[7][3][0]+"["+PPointsDis[7][3][1]+"]");
+  $("#pisteetper_eka").text(PPointsDis[7][0][0]+" ("+PPointsDis[7][0][1]+")");
+  $("#pisteetper_tok").text(PPointsDis[7][1][0]+" ("+PPointsDis[7][1][1]+")");
+  $("#pisteetper_kol").text(PPointsDis[7][2][0]+" ("+PPointsDis[7][2][1]+")");
+  $("#pisteetper_nel").text(PPointsDis[7][3][0]+" ("+PPointsDis[7][3][1]+")");
   $("#PlayerBestTrow").text(PlayerPoints[0].max()/2);
   $("#hauki_prosentti").text(PlayerPoints[4][0]+"%");
   $("#nolla_prosentti").text(PlayerPoints[4][4]+"%");
@@ -390,8 +390,11 @@ function pisteiden_taulukointi(lista,piste_lista){
         eraScore[0].push(EraPoints);
         eraScore[1].push(EraPoints/order);
         EraPoints = 0;
+        while (order < 4){
+          Trows[order].push(null);
+          order ++;
+        }
       }
-      // if ()
       order = 0;
       label.push(val.heitto_paikka);
       Game[0] ++;
@@ -417,29 +420,12 @@ function pisteiden_taulukointi(lista,piste_lista){
     order ++;
   });
   eraScore[0].push(EraPoints);
-  // console.log(paikat);
-    // for(var i = 0, len = lista.length; i < len; i ++){
-
-      // console.log("pituus",toka,typeof(lista[i].heitto_jarjestys),piste_lista[i],i)
-      // if($.inArray(Number(lista[i].heitto_jarjestys),aloitukset) > -1){
-      //     // console.log(lista[i].heitto_jarjestys,"sisällä")
-      //     aloitus.push(piste_lista[i]/2);
-      //     toka.push(piste_lista[i+1]/2);
-      //     kolmas.push(piste_lista[i+2]/2);
-      //     neljas.push(piste_lista[i+3]/2);
-          // label.push(lista[i].heitto_paikka);
-          // paikat[Number(lista[i].heitto_paikka)-1].push(piste_lista[i]/2,piste_lista[i+1]/2,piste_lista[i+2]/2,piste_lista[i+3]/2);
-          // keskiar = (piste_lista[i]+piste_lista[i+1]+piste_lista[i+2]+piste_lista[i+3])/2;
-          // eraScore.push(keskiar);
-          // i += 3;
-      // }
-	  // }
     // console.log([aloitus, toka, kolmas, neljas, label ,keskiarvo ]);
     $.each(paikat,function(i,val){
       if(val.length != 0){
         paikat[i] = [Math.round(100*(val.reduce(add,0)/val.length))/100,val.length];
       }else{
-        paikat[i] = ["-",0];
+        paikat[i] = ["",0];
       }
     });
     // console.log(Game[0], label, eraScore, paikat);

@@ -141,7 +141,7 @@ function count_wins(TeamGames,TeamName){
 
 function count_drows(ListPlayers){
 
-  var names = [];
+  // var names = [];
   var best = 0;
   var hauki = 0;
   var amount = 0;
@@ -151,21 +151,23 @@ function count_drows(ListPlayers){
   // console.log(ListPlayers);
   $.each(ListPlayers, function(i,val){
       trows =[];
-      names.push(i);
+      // names.push(i);
       // console.log(i,val.heitot);
       $.each(val.heitot,function(i,val2){
-        trows.push(val2.kyykat);
-        amount ++;
-        if (Number(val2.kyykat) > best){
-          best = val2.kyykat;
-        }
-        if (val2.kyykat == "h"){
-          hauki ++;
-        }else{
-          points += Number(val2.kyykat);
-        }
-        if (val2.kyykat == "h" || val2.kyykat == "0"){
+        if (val2.kyykat != '?'){
+          trows.push(val2.kyykat);
+          amount ++;
+          if (Number(val2.kyykat) > best){
+            best = val2.kyykat;
+          }
+          if (val2.kyykat == "h"){
+            hauki ++;
+          }else{
+            points += Number(val2.kyykat);
+          }
+          if (val2.kyykat == "h" || val2.kyykat == "0"){
             zeros ++;
+          }
         }
       });
   });
