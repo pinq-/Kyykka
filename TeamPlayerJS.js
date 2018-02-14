@@ -357,7 +357,7 @@ function heittojen_maara(lista){
 }
 
 function pisteiden_taulukointi(lista,piste_lista){
-  
+
   var label = [];
   var eraScore = [[],[]];
   var paikat = [[],[],[],[]];
@@ -415,6 +415,7 @@ function pisteiden_taulukointi(lista,piste_lista){
     order ++;
   });
   eraScore[0].push(EraPoints);
+  eraScore[1].push(EraPoints/order);
     // console.log([aloitus, toka, kolmas, neljas, label ,keskiarvo ]);
     $.each(paikat,function(i,val){
       if(val.length != 0){
