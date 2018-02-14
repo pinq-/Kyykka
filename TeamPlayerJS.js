@@ -357,22 +357,17 @@ function heittojen_maara(lista){
 }
 
 function pisteiden_taulukointi(lista,piste_lista){
-  // console.log(lista,piste_lista);
-    var aloitukset = [1,3,5,7,9,11,13,15];
-    var aloitus =[];
-    var toka = [];
-    var kolmas = [];
-    var neljas = [];
-    var label = [];
-    var eraScore = [[],[]];
-    var paikat = [[],[],[],[]];
-    var nollat = [0,0];
-
+  
+  var label = [];
+  var eraScore = [[],[]];
+  var paikat = [[],[],[],[]];
+  var nollat = [0,0];
   var Game = [0,0,0];
   var EraPoints = 0;
   var positon = 0;
   var order = 0;
   var Trows = [[],[],[],[]];
+
   $.each(piste_lista, function(i,val){
     if( val == 0){
       nollat[0] += 1;
