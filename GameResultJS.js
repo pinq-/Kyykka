@@ -3,7 +3,7 @@ var glob_GameAwayTrows;
 $( document ).ready(function() {
   $( "#GameFullPage" ).dialog({
     autoOpen: false,
-    width: 1100,
+    width: 1200,
     height: 700,
     show:{effect: "slide",duration: 200},
     hide:{effect: "slide",duration: 200}
@@ -158,7 +158,7 @@ function GameCountInfo(Trows,maxPoints){
       Order = [0,0];
       var LastLeft;
       $.each(era,function(a,trow){
-        PalyerTrows[Order[0]].push(trow.kyykat+'/['+trow.Left+']');
+        PalyerTrows[Order[0]].push(trow.kyykat+' ('+trow.Left+')');
         // console.log(Order[0],Order[1]);
         if (trow.kyykat != 'h'){
           eraPoints.push(Number(trow.kyykat));
@@ -247,6 +247,7 @@ function GameMakeTableResult(Trows,PlayerPoints,RoundPoints,names,Table,Team){
   }
   $("." + Table+ " div:eq(1)").html('<b>'+Team+'</b>');
   var PlayerResults;
+  console.log(Trows);
   $.each(Trows, function(i,val){
       var data =[{
         "Name": names[i],
@@ -255,8 +256,9 @@ function GameMakeTableResult(Trows,PlayerPoints,RoundPoints,names,Table,Team){
         "ThirdTrow": val[2],
         "FourthTrow": val[3],
         "TotalTrow": PlayerPoints[i],
-        "AvrageTrow": PlayerPoints[i]/4
+        "AvrageTrow": PlayerPoints[i]/val.length
       }];
+      console.log(data);
     $('#' + Table).dataTable().fnAddData(data);
   });
 }
