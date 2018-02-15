@@ -153,14 +153,17 @@ function GameCountInfo(Trows,maxPoints){
       HeittoJarjestys[0] = [0];
       HeittoJarjestys[1] = [0];
 
-      PalyerTrows = [[],[],[],[]];
+      PalyerTrows = [];
       PlayerPoints = [[],[],[],[]];
       Order = [0,0];
       var LastLeft;
       $.each(era,function(a,trow){
-        PalyerTrows[Order[0]].push(trow.kyykat+' ('+trow.Left+')');
+        if(!PalyerTrows[Number(trow.TrowPosition)-1]){
+          PalyerTrows[Number(trow.TrowPosition)-1] = [];
+        }
+        PalyerTrows[Number(trow.TrowPosition)-1].push(trow.kyykat+' ('+trow.Left+')');
         // console.log(Order[0],Order[1]);
-        if (trow.kyykat != 'h'){
+        if (!Number(trow.kyykat) == false){
           eraPoints.push(Number(trow.kyykat));
           heitot.push(Number(trow.kyykat))
           PlayerPoints[Order[0]].push(Number(trow.kyykat));
@@ -168,8 +171,9 @@ function GameCountInfo(Trows,maxPoints){
             paras = Number(trow.kyykat);
           }
           LastLeft = trow.Left - trow.kyykat;
-        }else{
-          heitot.push(Number(0))
+        }else if(trow.kyykat == 'h' || trow.kyykat == '0'){
+          // console.log("nolla");
+          heitot.push(0);
           PlayerPoints[Order[0]].push(0);
         }
         if (Order[1] == 0){
@@ -198,14 +202,14 @@ function GameCountInfo(Trows,maxPoints){
       for (i = 0; i < 4; i++){
         PlayerPoints[i] = PlayerPoints[i].reduce(add,0);
       }
-      // console.log(TeamName);
+      // console.log(TrowsTest);
       GameMakeTableResult(PalyerTrows,PlayerPoints,RoundSocre,names,tables[erat.length],TeamName);
       erat.push(RoundSocre);
       RoundLeft.push(LastLeft);
       OrderTeam[0]++;
     });
   });
-  // console.log(TrowsPoints,names);
+  // console.log(heitot);
   results[0] = Math.round(100*(heitot.reduce(add,0)/heitot.length))/100;
   results[1] = Math.round(100*(erat.reduce(add,0)/erat.length))/100;
   results[2] = paras;
@@ -218,6 +222,7 @@ function GameCountInfo(Trows,maxPoints){
 
 function GameMakeTableResult(Trows,PlayerPoints,RoundPoints,names,Table,Team){
   // console.log(Trows,PlayerPoints,RoundPoints,Team);
+  var places = ["FiristTrow", "SecondTrow", "ThirdTrow", "FourthTrow"];
   if($("." + Table +" div:eq(1)").html() == null){
     $('#' + Table).DataTable({
       "jQueryUI": true,
@@ -227,19 +232,26 @@ function GameMakeTableResult(Trows,PlayerPoints,RoundPoints,names,Table,Team){
       "bSort" : false,
       columns: [
         { data: 'Name',
+        defaultContent: "",
         "width": "25%"},
         { data: 'FiristTrow',
+        defaultContent: "",
         "width": "13%" },
         { data: 'SecondTrow',
+        defaultContent: "",
         "width": "13%" },
         { data: 'ThirdTrow',
+        defaultContent: "",
         "width": "13%" },
         { data: 'FourthTrow',
+        defaultContent: "",
         "width": "13%" },
         { data: 'TotalTrow',
+        defaultContent: "",
         "width": "1%"  },
         { data: 'AvrageTrow',
-        "width": "1%"  }
+        defaultContent: "",
+        "width": "1%"  },
       ]
     });
   }else{
@@ -247,18 +259,17 @@ function GameMakeTableResult(Trows,PlayerPoints,RoundPoints,names,Table,Team){
   }
   $("." + Table+ " div:eq(1)").html('<b>'+Team+'</b>');
   var PlayerResults;
-  console.log(Trows);
   $.each(Trows, function(i,val){
-      var data =[{
+    // console.log(i,val);
+      var data ={
         "Name": names[i],
-        "FiristTrow" : val[0],
-        "SecondTrow":val[1],
-        "ThirdTrow": val[2],
-        "FourthTrow": val[3],
-        "TotalTrow": PlayerPoints[i],
-        "AvrageTrow": PlayerPoints[i]/val.length
-      }];
-      console.log(data);
+      };
+      $.each(val, function(k,arvo){
+        data[places[k]] = val[k];
+      });
+      data["TotalTrow"] = PlayerPoints[i];
+      data["AvrageTrow"] = PlayerPoints[i]/val.length;
+      data = [data];
     $('#' + Table).dataTable().fnAddData(data);
   });
 }
