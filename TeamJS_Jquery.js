@@ -72,12 +72,17 @@ $( ".Team" ).click(function() {
       GetGameResults(SearchGame,select_year);
       $( '#GameFullPage' ).dialog( 'open' );
     });
+  $('#Teams1, #Teams2').on( 'click', function () {
+      var TeamName = $(this).text();
+      $( '#GameFullPage' ).dialog( 'close' );
+      get_team(TeamName);
+    });
 });
 
-function get_team(name){
+function get_team(Teamname){
   // console.log("haku",name);
   // console.log(haku_nimi,select_year)
-  $.getJSON("http://pinq.kapsi.fi/github/workspace/index.php", {cmd : "team",name: haku_nimi, year : select_year},function(data){
+  $.getJSON("http://pinq.kapsi.fi/github/workspace/index.php", {cmd : "team",name: Teamname, year : select_year},function(data){
     if (data.pelit.team != "not found"){
       var TeamGames = count_wins(data.pelit.games,data.pelit.team);
       var PalyersData = count_drows(data.pelaajat);
@@ -91,11 +96,13 @@ function get_team(name){
 };
 
 function count_wins(TeamGames,TeamName){
-  var games = [[],[],[],[],[],[]];
+  console.log()
+  var games = [[],[],[],[],[],[],[]];
   var wins = [];
   var loses = [];
   var even = [];
   $.each(TeamGames,function(i,val){
+    games[6].push(val.id);
     if(val.home.results.first != null){
       var home = Number(val.home.results.first) + Number(val.home.results.second);
       var away = Number(val.away.results.first) + Number(val.away.results.second);
@@ -257,11 +264,17 @@ function make_barchart(TeamGames){
                       xAxes: [{
                           stacked: true,
                       }]
-                  }
+                  },
+                  onClick: graphClickEvent
       }
   });
+  function graphClickEvent(event, array){
+    if(array[0]){
+      GetGameResults(TeamGames[6][Number(array[0]._index)],select_year);
+      $( '#GameFullPage' ).dialog( 'open' );
+    }
+  }
 }
-
 function fill_table(TeamPlayers,TeamGames,TeamName,TeamHistoy){
 
     var TeamErat = Array.prototype.concat.apply(TeamGames[0],TeamGames[1]);

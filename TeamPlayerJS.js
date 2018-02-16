@@ -100,20 +100,21 @@ function Update_pies(PlayerPoints,Trow_Names,max_amount){
   ];
 
   prosentti_label = {label: function(tooltipItem, data) {
+    // console.log(data,tooltipItem.yLabel);
     var dataset = data.datasets[tooltipItem.datasetIndex];
     var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
       return previousValue + currentValue;
     });
     var currentValue = dataset.data[tooltipItem.index];
     var precentage = Math.floor(((currentValue/total) * 100)+0.5);
-    return Trow_Names[tooltipItem.index] +": "+ precentage + "%";
+    return precentage + "% (" + tooltipItem.yLabel + ")";
   }}
 
   // console.log(paikat);
   $("#maara_1").text('Heittoja: '+ PlayerPoints[1].reduce(add, 0));
   var ctx = document.getElementById("heitotyli").getContext('2d');
   glob_heitotyli = new Chart(ctx, {
-      type: 'pie',
+      type: 'bar',
       data: {
           labels: Trow_Names,
           datasets: [{
@@ -139,7 +140,7 @@ function Update_pies(PlayerPoints,Trow_Names,max_amount){
     $("#maara_2").text('Heittoja: '+ PlayerPoints[2].reduce(add, 0));
     var ctx2 = document.getElementById("heitotali").getContext('2d');
     glob_heitotali = new Chart(ctx2, {
-        type: 'pie',
+        type: 'bar',
         data: {
             labels: Trow_Names,
             datasets: [{
@@ -167,7 +168,7 @@ function Update_pies(PlayerPoints,Trow_Names,max_amount){
       $("#maara_3").text('Heittoja: '+ PlayerPoints[3].reduce(add, 0));
       var ctx3 = document.getElementById("aloitusheitot").getContext('2d');
       glob_aloitusheitot = new Chart(ctx3, {
-          type: 'pie',
+          type: 'bar',
           data: {
               labels: Trow_Names,
               datasets: [{

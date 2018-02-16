@@ -33,10 +33,10 @@ function GetGameResults(GameID,select_year){
       GameFillTables(data.Results.game);
       Gameresults = GameCountInfo(data.Trows,max_amount);
       GameMakeGamelist(data.Results.PreGames);
-      // console.log(data.Trows);
       GameFillInfo(Gameresults);
       FillResults(data.Results.game, Gameresults[3]);
       GameMakePie(Gameresults[4],data.Results.game.home.name,data.Results.game.away.name);
+      GetWheter(data.Results.game.date);
       $(".TeamGameResults").show();
     }
   });
@@ -46,7 +46,8 @@ function GameFillTables(TheGame){
   // console.log(TheGame);
   var home = Number(TheGame.home.results.first) + Number(TheGame.home.results.second);
   var away = Number(TheGame.away.results.first) + Number(TheGame.away.results.second);
-  $("#Teams").text(TheGame.home.name+" vs. "+ TheGame.away.name);
+  $("#Teams1").text(TheGame.home.name);
+  $("#Teams2").text(TheGame.away.name);
   $("#HomeResult").text(home);
   $("#AwayResult").text(away);
   $("#HomeAvrage").text("("+Math.round(10*TheGame.home.average)/10+")");
@@ -379,4 +380,25 @@ function GameMakePie(Trows,Home,Away){
          }
       }
   });
+}
+
+function GetWheter(aika){
+  aika = aika.split(" ");
+  aika = aika[0] + "T" + aika[1] + "Z";
+  // aika = "2008-02-02T18:00:00Z";
+  // console.log(aika);
+  $.getJSON("http://pinq.kapsi.fi/github/workspace/Wheter_ask.php", {time : aika})
+  .done(function(data){
+    if (data.length == 0){
+
+      $("#GameEarTemper").text(null);
+      $("#GameSnow").text(null);
+    }
+    else{
+      // console.log(data.temper,data);
+      $("#GameEarTemper").text(data[1].temper);
+      $("#GameSnow").text(data[0].snow);
+    }
+  });
+
 }
