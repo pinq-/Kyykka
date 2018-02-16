@@ -357,7 +357,6 @@ function heittojen_maara(lista){
 }
 
 function pisteiden_taulukointi(lista,piste_lista){
-
   var label = [];
   var eraScore = [[],[]];
   var paikat = [[],[],[],[]];
@@ -379,7 +378,9 @@ function pisteiden_taulukointi(lista,piste_lista){
     }
   });
     // console.log(lista.length/4)
+  // console.log(lista);
   $.each(lista, function(i,val){
+    // console.log(val,order);
     if(Game[1] != val.ottelu_numero || Game[2] != val.era){
       if(Game[0] != 0){
         eraScore[0].push(EraPoints);

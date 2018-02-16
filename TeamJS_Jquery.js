@@ -362,6 +362,7 @@ function Team_MakePlayerList(PlayerList){
         { data: 'Eriä' },
         { data: 'pisteet' },
         { data: 'ka-heitto' },
+        { data: 'ka-era' },
         { data: 'nolla' },
         { data: 'ka-heittopaikka' },
         { data: 'parasheitto' },
@@ -383,6 +384,7 @@ function Team_MakePlayerList(PlayerList){
         "Eriä" : PlayerResults[0],
         "pisteet":PlayerResults[4],
         "ka-heitto": PlayerResults[1],
+        "ka-era": PlayerResults[6],
         "nolla": PlayerResults[3],
         "ka-heittopaikka": PlayerResults[2],
         "parasheitto": PlayerResults[5],
@@ -394,37 +396,47 @@ function Team_MakePlayerList(PlayerList){
 
 function Team_CountPlayerValues(List){
   // console.log(List);
-  var PlayerResults = [[0,0,0],[],[],[],[],0];
-  var TrowAmount = 0;
+  var PlayerResults = [[0,0,0],[],[],[],[],0,[]];
+  var TrowAmount = 0,
+      RoundScore = 0;
+
   $.each(List, function(i,val){
-    if(val.kyykat != '?'){
-      TrowAmount ++;
-      PlayerResults[2].push(Number(val.heitto_paikka));
-    }
     if(PlayerResults[0][1] != val.ottelu_numero || PlayerResults[0][2] != val.era){
+      if(PlayerResults[0][0] > 0){
+        PlayerResults[6].push(RoundScore);
+        RoundScore = 0;
+      }
       PlayerResults[0][0] ++;
       PlayerResults[0][1] = val.ottelu_numero;
       PlayerResults[0][2] = val.era;
     }
+    if(val.kyykat != '?'){ // Heittojen määrä
+      TrowAmount ++;
+      PlayerResults[2].push(Number(val.heitto_paikka));
+    }
     // console.log(isNaN(val.kyykat),val.kyykat);
-    if(isNaN(val.kyykat) == false){
+    if(isNaN(val.kyykat) == false){ //Ulos heitetetyt kyykat
       PlayerResults[1].push(Number(val.kyykat));
+      RoundScore += Number(val.kyykat);
       // console.log(val.kyykat);
     }
-    if(val.kyykat == 'h' || val.kyykat == '0'){
+    if(val.kyykat == 'h' || val.kyykat == '0'){ //Nolla prosentti
       PlayerResults[3].push(Number(val.kyykat));
       // console.log(val.kyykat);
     }
-    if (Number(val.kyykat) > PlayerResults[5]){
+    if (Number(val.kyykat) > PlayerResults[5]){ //Paras heitto
       PlayerResults[5] = Number(val.kyykat);
     }
   });
-  // console.log(TrowAmount,PlayerResults[0][0]);
+  // console.log(PlayerResults[6]);
+  PlayerResults[6].push(RoundScore);
   PlayerResults[4] =PlayerResults[1].reduce(add, 0)*2;
   PlayerResults[1] =Math.round(100*(PlayerResults[1].reduce(add, 0)/TrowAmount))/100;
   PlayerResults[2] =Math.round(100*(PlayerResults[2].reduce(add, 0)/TrowAmount))/100;
   PlayerResults[3] =Math.round(1000*(PlayerResults[3].length/TrowAmount))/10;
+  PlayerResults[6] =Math.round(100*(PlayerResults[6].reduce(add, 0)/PlayerResults[6].length))/100;
   PlayerResults[0] = PlayerResults[0][0];
+  // console.log(PlayerResults[6]);
   // console.log(PlayerResults);
 
   return PlayerResults;
