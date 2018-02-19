@@ -66,7 +66,8 @@ function GameFillTables(TheGame){
 }
 function GameFillTablesEmpty(TheGame){
   // console.log(TheGame);
-  $("#Teams").text(TheGame.home.name+" vs. "+ TheGame.away.name);
+  $("#Teams1").text(TheGame.home.name);
+  $("#Teams2").text(TheGame.away.name);
   $("#HomeResult").text(" - ");
   $("#AwayResult").text(" - ");
   $("#HomeAvrage").text("("+Math.round(10*TheGame.home.average)/10+")");

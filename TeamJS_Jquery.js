@@ -62,16 +62,14 @@ $( ".Team" ).click(function() {
       $( '#TeamPlayer' ).dialog( 'open' );
     });
 
-  $('#game_results').on( 'click', 'div .TeamMore', function () {
+  $('#game_results').on( 'click', '#main', function () {
       var SearchGame = $(this).attr('href');
       GetGameResults(SearchGame,select_year);
       $( '#GameFullPage' ).dialog( 'open' );
     });
-  $('#game_results').on( 'click', 'div .NoResult', function () {
-      var SearchGame = $(this).attr('href');
-      GetGameResults(SearchGame,select_year);
-      $( '#GameFullPage' ).dialog( 'open' );
-    });
+  $('#game_results' ).on( "mouseenter mouseleave", '#main', function( event ) {
+    $( this ).toggleClass( "hover" );
+  });
   $('#Teams1, #Teams2').on( 'click', function () {
       var TeamName = $(this).text();
       $( '#GameFullPage' ).dialog( 'close' );
@@ -96,7 +94,7 @@ function get_team(Teamname){
 };
 
 function count_wins(TeamGames,TeamName){
-  console.log()
+  // console.log()
   var games = [[],[],[],[],[],[],[]];
   var wins = [];
   var loses = [];
@@ -317,13 +315,13 @@ function make_gamelist(games,AmountGames){
   var options = ["havio","tasapeli","voitto"];
   var jarjestys = [];
   $("#game_results").html('');
-  $("#game_results").css("height",AmountGames*4+"em");
+  // $("#game_results").css("height",AmountGames*4+"em");
   $.each(games,function(i,val){
       var home = Number(val.home.results.first) + Number(val.home.results.second);
       var away = Number(val.away.results.first) + Number(val.away.results.second);
 
       if(val.home.results.first == null){
-        $("#game_results").append('<div id="main"><div class="NoResult" href ="'+val.id+'">'+val.home.name+'</div><div class="center"> - </div><div class="center"> - </div><div class="NoResult" href ="'+val.id+'">'+val.away.name+'</div></div>');
+        $("#game_results").append('<div id="main" href ="'+val.id+'"><div>'+val.home.name+'</div><div class="center"> - </div><div class="center"> - </div><div class="NoResult" href ="'+val.id+'">'+val.away.name+'</div></div>');
       }else{
         if (home > away){
           jarjestys = [options[0],options[2]];
@@ -355,9 +353,7 @@ function make_gamelist(games,AmountGames){
           jarjestys[5] = options[1];
           jarjestys[6] = options[1];
         }
-        $("#game_results").append('<div id="main"><div class="'+jarjestys[0]+'">'+val.home.name+'</div><div class="center">'+home+'</div><div class="center">'+away+'</div><div class='+jarjestys[1]+'>'+val.away.name+'</div></div>');
-        $("#game_results").append('<div class="erat"><div class="era"><div class="leveys">Erä 1.</div><div class="'+jarjestys[3]+' center">'+val.home.results.first+'</div><div class="'+jarjestys[4]+' center">'+val.away.results.first+'</div></div>'
-        +'<div class="era"><div class="leveys">Erä 2.</div><div class="'+jarjestys[5]+' center">'+val.home.results.second+'</div><div class="'+jarjestys[6]+' center">'+val.away.results.second+'</div></div><div class = "TeamMore" href ="'+val.id+'" >Lisää</div></div>');
+        $("#game_results").append('<div id="main" href ="'+val.id+'"><div class="'+jarjestys[0]+'">'+val.home.name+'</div><div class="center">'+home+'</div><div class="center">'+away+'</div><div class='+jarjestys[1]+'>'+val.away.name+'</div></div>');
       }
     });
 }

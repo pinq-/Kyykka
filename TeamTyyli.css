@@ -41,6 +41,7 @@ canvas{
 #game_results{
   float:left;
   width: 40%;
+  max-width:360px;
   margin: 0 auto;
   text-align: center;
   font-family: Arial;
@@ -54,6 +55,7 @@ canvas{
 
 #main {
   width: 100%;
+  height: 20px;
 }
 #main div{
   float:left;
@@ -62,7 +64,10 @@ canvas{
 #main .center{
   width: 10%;
 }
+.hover {
+  background:	rgb(200,200,200);
 
+}
 .voitto{
   background:	rgb(144,255,59);
   font-weight: bold;
