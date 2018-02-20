@@ -75,6 +75,9 @@ $( ".Team" ).click(function() {
       $( '#GameFullPage' ).dialog( 'close' );
       get_team(haku_nimi);
     });
+
+
+    GetTeamsScores();
 });
 
 function get_team(Teamname){
@@ -90,6 +93,12 @@ function get_team(Teamname){
     }else{
       $("#Nimi").text(data.pelit.team);
     }
+  });
+};
+
+function GetTeamsScores(){
+  $.getJSON("http://pinq.kapsi.fi/github/workspace/index.php", {cmd : "Teams", year : select_year},function(data){
+    FillTeamsresults(data);
   });
 };
 
@@ -449,4 +458,15 @@ function Team_CountPlayerValues(List){
   // console.log(PlayerResults);
 
   return PlayerResults;
+}
+
+function FillTeamsresults(List){
+    var val = 1;
+    $.each(List, function(i, val){
+      if( i == haku_nimi){
+
+        console.log(i,val);
+      }
+    });
+
 }
