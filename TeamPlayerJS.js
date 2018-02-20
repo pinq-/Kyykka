@@ -343,7 +343,8 @@ function heittojen_maara(lista){
         return [];
     }
     tulos_lista = [0,0,0,0,0,0,0,0,0];
-    $.each(lista, function(index){
+    $.each(lista, function(index, val){
+
         if (lista[index] === 'h'){
             tulos_lista[0] += 1;
         }
@@ -351,7 +352,7 @@ function heittojen_maara(lista){
             tulos_lista[Number(lista[index])+1] += 1;
         }
         else {
-            tulos_lista[7] += 1;
+            tulos_lista[8] += 1;
         }
     });
     return tulos_lista;

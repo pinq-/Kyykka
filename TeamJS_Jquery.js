@@ -71,9 +71,9 @@ $( ".Team" ).click(function() {
     $( this ).toggleClass( "hover" );
   });
   $('#Teams1, #Teams2').on( 'click', function () {
-      var TeamName = $(this).text();
+      haku_nimi = $(this).text();
       $( '#GameFullPage' ).dialog( 'close' );
-      get_team(TeamName);
+      get_team(haku_nimi);
     });
 });
 
@@ -100,8 +100,8 @@ function count_wins(TeamGames,TeamName){
   var loses = [];
   var even = [];
   $.each(TeamGames,function(i,val){
-    games[6].push(val.id);
     if(val.home.results.first != null){
+      games[6].push(val.id);
       var home = Number(val.home.results.first) + Number(val.home.results.second);
       var away = Number(val.away.results.first) + Number(val.away.results.second);
 
