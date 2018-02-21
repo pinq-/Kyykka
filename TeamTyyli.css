@@ -109,6 +109,10 @@ canvas{
 #Team_PlayerList tbody tr:hover td{
     background-color: rgb(220,220,220) !important;
 }
+
+#TeamsScoret tr:hover td{
+    background-color: rgb(220,220,220);
+}
 #Team_PlayerList tbody{
   font-family: Arial;
 }

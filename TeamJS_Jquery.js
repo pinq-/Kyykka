@@ -5,6 +5,7 @@ var TeamGlobalTrows;
 $( document ).ready(function() {
   $('#TeamrResultinfo th').tooltip({  delay:0, fade:250,position:{my:"center top-70",at:"center top"}});
   $('#Team_PlayerList th').tooltip({  delay:0, fade:250,position:{my:"center top-50",at:"center top"}});
+  $('#TeamsScoret th').tooltip({  delay:0, fade:250,position:{my:"center top-50",at:"center top"}});
   $("#game_results").on("click","#main", function(){
     // $(this).next('.erat').slideToggle(1000);
     $(this).next('.erat').slideToggle(1000);
@@ -13,22 +14,31 @@ $( document ).ready(function() {
     show: {effect: "slide",duration: 200},
     hide: {effect: "slide",duration: 200},
     autoOpen: false,
+    width: 500,
     open: function(event, ui) {
        $("#joukkue_haku").val(""),
        $(this).off('submit').on('submit', function () {
          $( this ).dialog( "close" );
          haku_nimi = $("#joukkue_haku").val();
          if (haku_nimi != ""){
+           // console.log("ykkönen");
            get_team(haku_nimi);
          };
        return false;
       });
+      $('#TeamsScoret').unbind('click').on( 'click', 'tr', function () {
+          haku_nimi =$(this).closest('tr').children('td:first').text();
+          // console.log("kakkonen");
+          get_team(haku_nimi);
+          $( "#dialog").dialog( "close" );
+        });
      },
     buttons: {
        "Hae":function(){
          $( this ).dialog( "close" );
          haku_nimi = $("#joukkue_haku").val();
          if (haku_nimi != ""){
+           // console.log("kolmas");
            get_team(haku_nimi);
          };
        },
@@ -52,8 +62,9 @@ $( ".Team" ).click(function() {
           max_amount = 20;
 
         }
-
+        // console.log("neljäs");
         get_team(haku_nimi);
+        GetTeamsScores();
       }
   }).trigger("change");
   $('#Team_PlayerList tbody').on( 'click', 'tr', function () {
@@ -73,6 +84,7 @@ $( ".Team" ).click(function() {
   $('#Teams1, #Teams2').on( 'click', function () {
       haku_nimi = $(this).text();
       $( '#GameFullPage' ).dialog( 'close' );
+      // console.log("viides");
       get_team(haku_nimi);
     });
 
@@ -81,7 +93,7 @@ $( ".Team" ).click(function() {
 });
 
 function get_team(Teamname){
-  // console.log("haku",name);
+  // console.log("haku",Teamname);
   // console.log(haku_nimi,select_year)
   $.getJSON("http://pinq.kapsi.fi/github/workspace/index.php", {cmd : "team",name: Teamname, year : select_year},function(data){
     if (data.pelit.team != "not found"){
@@ -461,12 +473,45 @@ function Team_CountPlayerValues(List){
 }
 
 function FillTeamsresults(List){
-    var val = 1;
-    $.each(List, function(i, val){
-      if( i == haku_nimi){
-
-        console.log(i,val);
-      }
+  // console.log(List);
+  if ($("#TeamsScoret div:eq(1)").html() == null){
+    // console.log("tyhjä")
+    $('#TeamsScoret').DataTable({
+      "jQueryUI": true,
+      paging: false,
+      searching: false,
+      "info": false,
+      "bSort" : false,
+      columns: [
+        { data: 'Nimi' },
+        { data: 'Otteluja' },
+        { data: 'Voitot' },
+        { data: 'Tasapelit' },
+        { data: 'Häviöt' },
+        { data: 'Ottelu_Pisteet' },
+        { data: 'Pisteet' },
+        { data: 'Peli_keskiarvo' }
+      ]
     });
-
+  }else{
+    $('#TeamsScoret').dataTable().fnClearTable();
+  }
+  var val = 1;
+  var points, games;
+  $.each(List, function(i,val){
+    points = Number(val[0].wins)*2 + Number(val[0].Even);
+    games = Number(val[0].wins) + Number(val[0].Even) + Number(val[0].Lost);
+    // console.log(val[0].wins,val.wins);
+      var data =[{
+        "Nimi": i,
+        "Otteluja": games,
+        "Voitot" : val[0].wins,
+        "Tasapelit":val[0].Even,
+        "Häviöt": val[0].Lost,
+        "Ottelu_Pisteet": points,
+        "Pisteet": val[0].Score,
+        "Peli_keskiarvo": Math.round(10*(Number(val[0].Avrage)))/10
+      }];
+    $('#TeamsScoret').dataTable().fnAddData(data);
+  });
 }
