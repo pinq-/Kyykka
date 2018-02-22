@@ -497,7 +497,7 @@ function FillTeamsresults(List){
     $('#TeamsScoret').dataTable().fnClearTable();
   }
   var val = 1;
-  var points, games;
+  var points, games, playoff;
   $.each(List, function(i,val){
     points = Number(val[0].wins)*2 + Number(val[0].Even);
     games = Number(val[0].wins) + Number(val[0].Even) + Number(val[0].Lost);
@@ -514,4 +514,8 @@ function FillTeamsresults(List){
       }];
     $('#TeamsScoret').dataTable().fnAddData(data);
   });
+  playoff = Math.round(Object.keys(List).length/2);
+  playoff += (playoff +1) % 2 ^ 1;
+  // console.log(playoff);
+  $("#TeamsScoret tr:nth-child(-n+" + playoff + ")").css("background","rgb(235,255,235)");
 }
