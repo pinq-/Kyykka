@@ -1,4 +1,4 @@
 print("julia is musi and musi is shushi")
-for kisu in house:
-	print(kisu)
+for mosha in house:
+	print(mosha)
 end
